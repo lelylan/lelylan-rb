@@ -135,6 +135,42 @@ module Lelylan
       def update_properties(device, options={})
         put("/devices/#{find_id(device)}/properties", options)
       end
+
+      # Public: Create the connection between a device and a physical device.
+      # Find more at {http://dev.lelylan.com/rest/devices/physical/#update Lelylan Dev Center}.
+      #
+      # device - A String that represent the device URI.
+      # options - The Hash option containing the physcial device to connect (default: {}). Check out the {http://dev.lelylan.com/rest/devices/physical/#update API doc} for the accepted options.
+      #           :uri - A String that represent the physical device URI.
+      # 
+      # Returns Hashie The device with the connected physical device.
+      #
+      # Examples
+      #
+      #   device   = "http://api.lelyla.com/devices/4dcb9e23d033a9088900000a"
+      #   physical = "http://node.lelylan.com/devices/8ecfd3a9b9a0e4"
+      #
+      #   client.update_properties(device, uri: physical)
+      #
+      def connect_physical(device, options={})
+        put("/devices/#{find_id(device)}/physical", options)
+      end
+
+      # Public: Delete the connection between a device and a physical device.
+      # Find more at {http://dev.lelylan.com/rest/devices/physical/#delete Lelylan Dev Center}.
+      #
+      # device - A String that represent the device URI.
+      # 
+      # Returns Hashie The device with the removed connection to the physical device.
+      #
+      # Examples
+      #
+      #   device = "http://api.lelyla.com/devices/4dcb9e23d033a9088900000a"
+      #   client.update_properties(device)
+      #
+      def disconnect_physical(device, options={})
+        delete("/devices/#{find_id(device)}/physical")
+      end
     end
   end
 end

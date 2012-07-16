@@ -220,4 +220,64 @@ describe Lelylan::Client::Devices do
       a_put("#{path}/properties").with(body: {properties: properties}).should have_been_made
     end
   end
+
+
+  describe ".connect_physical" do
+
+    let(:path) do
+      "/devices/4dcb9e23d033a9088900000a"
+    end
+
+    let(:physical) do
+      "http://api.lelylan.com/properties/4dcb9e23d033a9088900020a"
+    end
+
+    let(:uri) do
+      "http://api.lelylan.com/#{path}"
+    end
+
+    before do
+      stub_put("#{path}/physical").with(body: {uri: physical}).to_return(body: fixture("device.json"))
+    end
+
+    let!(:device) do
+      client.connect_physical(uri, uri: physical)
+    end
+
+    it "returns the updated device" do
+      device.uri.should_not be_nil
+    end
+
+    it "sends the request" do
+      a_put("#{path}/physical").with(body: {uri: physical}).should have_been_made
+    end
+  end
+
+
+  describe ".disconnect_physical" do
+
+    let(:path) do
+      "/devices/4dcb9e23d033a9088900000a"
+    end
+
+    let(:uri) do
+      "http://api.lelylan.com/#{path}"
+    end
+
+    before do
+      stub_delete("#{path}/physical").to_return(body: fixture("device.json"))
+    end
+
+    let!(:device) do
+      client.disconnect_physical(uri)
+    end
+
+    it "returns the updated device" do
+      device.uri.should_not be_nil
+    end
+
+    it "sends the request" do
+      a_delete("#{path}/physical").should have_been_made
+    end
+  end
 end
