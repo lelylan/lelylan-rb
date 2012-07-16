@@ -1,0 +1,16 @@
+{
+    "uri": "http://www.example.com/histories/5003c552d033a96a3c000398",
+    "id": "5003c552d033a96a3c000398",
+    "device": {
+        "uri": "http://www.example.com/devices/5003c552d033a96a3c000394"
+    },
+    "properties": [{
+        "uri": "https://type.lelylan.com/properties/intensity",
+        "value": "100.0"
+    },
+    {
+        "uri": "https://type.lelylan.com/properties/status",
+        "value": "on"
+    }],
+    "created_at": "2012-07-09T09:40:02+02:00"
+}

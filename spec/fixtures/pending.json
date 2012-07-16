@@ -1,0 +1,12 @@
+{
+    "uri": "http://www.example.com/devices/5003c553d033a96a3c0003e0",
+    "status": "true",
+    "properties": [{
+        "uri": "https://type.lelylan.com/properties/status",
+        "value": "off"
+    },
+    {
+        "uri": "https://type.lelylan.com/properties/intensity",
+        "value": "0.0"
+    }]
+}

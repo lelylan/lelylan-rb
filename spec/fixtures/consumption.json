@@ -1,0 +1,11 @@
+{
+    "uri": "http://www.example.com/consumptions/5003c54dd033a96a3c0000fc",
+    "id": "5003c54dd033a96a3c0000fc",
+    "device": {
+        "uri": "http://www.example.com/devices/5003c54dd033a96a3c0000f8"
+    },
+    "type": "instantaneous",
+    "value": 125.0,
+    "unit": "kwh",
+    "occur_at": "2012-07-09T09:39:57+02:00"
+}
