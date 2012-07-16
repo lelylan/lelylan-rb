@@ -46,10 +46,11 @@ module Lelylan
       # Public: Create a device and returns extended information for it.
       # Find more at {http://dev.lelylan.com/rest/devices/core/#create Lelylan Dev Center}.
       #
+      # uri - A String that represent the device URI.
       # options - The Hash option used to create the resource (default: {}). 
       #           Check out the {http://dev.lelylan.com/rest/devices/core/#create API doc} for the accepted options.
       # 
-      # Returns Hashie The device.
+      # Returns Hashie The created device.
       #
       # Examples
       # 
@@ -60,6 +61,38 @@ module Lelylan
         post("/devices", options)
       end
 
+      # Public: Update a device identified from its URI and returns extended information for it.
+      # Find more at {http://dev.lelylan.com/rest/devices/core/#update Lelylan Dev Center}.
+      #
+      # options - The Hash option used to update the resource (default: {}). 
+      #           Check out the {http://dev.lelylan.com/rest/devices/core/#update API doc} for the accepted options.
+      # 
+      # Returns Hashie The updated device.
+      #
+      # Examples
+      # 
+      #   device = "http://api.lelyla.com/devices/4dcb9e23d033a9088900000a"
+      #   client.update_device(device, name: 'Closed dimmer')
+      #
+      def update_device(uri, options = {})
+        put("/devices/#{find_id(uri)}", options)
+      end
+
+      # Public: Delete a device identified from its URI and returns extended information for it.
+      # Find more at {http://dev.lelylan.com/rest/devices/core/#delete Lelylan Dev Center}.
+      #
+      # uri - A String that represent the device URI.
+      # 
+      # Returns Hashie The deleted device.
+      #
+      # Examples
+      # 
+      #   device = "http://api.lelyla.com/devices/4dcb9e23d033a9088900000a"
+      #   client.delete_device(device)
+      #
+      def delete_device(uri)
+        delete("/devices/#{find_id(uri)}")
+      end
     end
   end
 end
