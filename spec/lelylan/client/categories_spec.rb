@@ -7,6 +7,34 @@ describe Lelylan::Client::Categories do
   end
 
 
+  describe ".category" do
+
+    let(:path) do
+      "/categories/4dcb9e23d033a9088900000a"
+    end
+
+    let(:uri) do
+      "http://api.lelylan.com/#{path}"
+    end
+
+    before do
+      stub_get(path).to_return(body: fixture("category.json"))
+    end
+
+    let!(:category) do
+      client.category(uri)
+    end
+
+    it "returns the category" do
+      category.uri.should_not be_nil
+    end
+
+    it "sends the request" do
+      a_get(path).should have_been_made
+    end
+  end
+
+
   describe ".categories" do
 
     let(:path) do
@@ -46,30 +74,31 @@ describe Lelylan::Client::Categories do
   end
 
 
-  describe ".category" do
+  describe ".public_categories" do
 
     let(:path) do
-      "/categories/4dcb9e23d033a9088900000a"
-    end
-
-    let(:uri) do
-      "http://api.lelylan.com/#{path}"
+      "/categories/public"
     end
 
     before do
-      stub_get(path).to_return(body: fixture("category.json"))
+      client.user     = nil
+      client.password = nil
     end
 
-    let!(:category) do
-      client.category(uri)
+    before do
+      stub_get(path).to_return(body: fixture("categories.json"))
     end
 
-    it "returns the category" do
-      category.uri.should_not be_nil
+    let!(:categories) do
+      client.public_categories
+    end
+
+    it "returns a list of categories" do
+      categories.should have(1).item
     end
 
     it "sends the request" do
-      a_get(path).should have_been_made
+      a_get('http://api.lelylan.com/categories/public').should have_been_made
     end
   end
 

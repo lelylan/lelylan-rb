@@ -2,6 +2,22 @@ module Lelylan
   class Client
     module Histories
 
+      # Public: Returns extended information for a given history identified from its URI.
+      # Find more at {http://dev.lelylan.com/rest/devices/history/#get Lelylan Dev Center}.
+      #
+      # history - A String that represents the history URI.
+      #
+      # Returns Hashie The history resource.
+      #
+      # Examples
+      #
+      #   history = "http://api.lelylan.com/histories/4dcb9e23d033a9088900200f"
+      #   client.history(history)
+      #
+      def history(history)
+        get("/histories/#{find_id(history)}")
+      end
+
       # Public: Returns a list of history resources for a given device identified from its URI.
       # Find more at {http://dev.lelylan.com/rest/devices/history/#all Lelylan Dev Center}.
       #
@@ -20,22 +36,6 @@ module Lelylan
       #
       def histories(device, options = {})
         get("/devices/#{find_id(device)}/histories", options)
-      end
-
-      # Public: Returns extended information for a given history identified from its URI.
-      # Find more at {http://dev.lelylan.com/rest/devices/history/#get Lelylan Dev Center}.
-      #
-      # history - A String that represents the history URI.
-      #
-      # Returns Hashie The history resource.
-      #
-      # Examples
-      #
-      #   history = "http://api.lelylan.com/histories/4dcb9e23d033a9088900200f"
-      #   client.history(history)
-      #
-      def history(history)
-        get("/histories/#{find_id(history)}")
       end
     end
   end

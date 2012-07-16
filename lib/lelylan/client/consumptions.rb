@@ -3,6 +3,22 @@ module Lelylan
     module Consumptions
 
       # Public: Returns extended information for a given consumption identified from its URI.
+      # Find more at {http://dev.lelylan.com/rest/devices/consumptions/#get Lelylan Dev Center}.
+      #
+      # consumption - A String that represent the consumption URI.
+      #
+      # Returns Hashie The consumption.
+      #
+      # Examples
+      #
+      #   consumption = "http://api.lelylan.com/consumption/4dcb9e23d033a9088902200a"
+      #   client.consumption(consumption)
+      #
+      def consumption(consumption)
+        get("/consumptions/#{find_id(consumption)}")
+      end
+
+      # Public: Returns extended information for a given consumption identified from its URI.
       # Find more at {http://dev.lelylan.com/rest/devices/consumptions/#all Lelylan Dev Center}.
       #
       # options - The Hash option used to refine the search (default: {}). 
@@ -22,27 +38,11 @@ module Lelylan
         get("/consumptions", options)
       end
 
-      # Public: Returns extended information for a given consumption identified from its URI.
-      # Find more at {http://dev.lelylan.com/rest/devices/consumptions/#get Lelylan Dev Center}.
-      #
-      # consumption - A String that represent the consumption URI.
-      #
-      # Returns Hashie The consumption.
-      #
-      # Examples
-      #
-      #   consumption = "http://api.lelylan.com/consumption/4dcb9e23d033a9088902200a"
-      #   client.consumption(consumption)
-      #
-      def consumption(consumption)
-        get("/consumptions/#{find_id(consumption)}")
-      end
-
       # Public: Create a consumption and returns extended information for it.
       # Find more at {http://dev.lelylan.com/rest/devices/consumptions/#create Lelylan Dev Center}.
       #
       # options - The Hash option used to create the resource (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/devices/consumption/#create API doc} for the accepted options.
+      #           Check out the {http://dev.lelylan.com/rest/devices/consumptions/#create API doc} for the accepted options.
       # 
       # Returns Hashie The created consumption.
       #

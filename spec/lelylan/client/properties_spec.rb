@@ -7,6 +7,34 @@ describe Lelylan::Client::Properties do
   end
 
 
+  describe ".property" do
+
+    let(:path) do
+      "/properties/4dcb9e23d033a9088900000a"
+    end
+
+    let(:uri) do
+      "http://api.lelylan.com/#{path}"
+    end
+
+    before do
+      stub_get(path).to_return(body: fixture("property.json"))
+    end
+
+    let!(:property) do
+      client.property(uri)
+    end
+
+    it "returns the property" do
+      property.uri.should_not be_nil
+    end
+
+    it "sends the request" do
+      a_get(path).should have_been_made
+    end
+  end
+
+
   describe ".properties" do
 
     let(:path) do
@@ -46,30 +74,31 @@ describe Lelylan::Client::Properties do
   end
 
 
-  describe ".property" do
+  describe ".public_properties" do
 
     let(:path) do
-      "/properties/4dcb9e23d033a9088900000a"
-    end
-
-    let(:uri) do
-      "http://api.lelylan.com/#{path}"
+      "/properties/public"
     end
 
     before do
-      stub_get(path).to_return(body: fixture("property.json"))
+      client.user     = nil
+      client.password = nil
     end
 
-    let!(:property) do
-      client.property(uri)
+    before do
+      stub_get(path).to_return(body: fixture("properties.json"))
     end
 
-    it "returns the property" do
-      property.uri.should_not be_nil
+    let!(:properties) do
+      client.public_properties
+    end
+
+    it "returns a list of properties" do
+      properties.should have(1).item
     end
 
     it "sends the request" do
-      a_get(path).should have_been_made
+      a_get('http://api.lelylan.com/properties/public').should have_been_made
     end
   end
 

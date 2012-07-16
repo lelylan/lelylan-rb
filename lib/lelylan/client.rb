@@ -10,7 +10,7 @@ require 'lelylan/client/properties'
 require 'lelylan/client/functions'
 require 'lelylan/client/statuses'
 require 'lelylan/client/categories'
-#require 'lelylan/client/locations'
+require 'lelylan/client/locations'
 
 module Lelylan
   class Client
@@ -42,6 +42,6 @@ module Lelylan
     include Lelylan::Client::Functions
     include Lelylan::Client::Statuses
     include Lelylan::Client::Categories
-    #include Lelylan::Client::Locations
+    include Lelylan::Client::Locations
   end
 end

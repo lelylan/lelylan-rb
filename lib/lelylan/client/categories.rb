@@ -38,6 +38,23 @@ module Lelylan
         get("/categories", options)
       end
 
+      # Public: Returns a list of all public categories.
+      # Find more at {http://dev.lelylan.com/rest/categories/core/#all Lelylan Dev Center}.
+      #
+      # options - The Hash option used to refine the search (default: {}). 
+      #           Check out the {http://dev.lelylan.com/rest/devices/categories/#all API doc} for the accepted options.
+      # 
+      # Returns Hashie List of categories.
+      #
+      # Examples
+      # 
+      #   # Retrurns the first 10 public categories
+      #   client.public_categories(per: 10)
+      #
+      def public_categories(options = {})
+        get("/categories/public", options)
+      end
+
       # Public: Create a category and returns extended information for it.
       # Find more at {http://dev.lelylan.com/rest/types/categories/#create Lelylan Dev Center}.
       #

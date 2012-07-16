@@ -38,6 +38,26 @@ module Lelylan
         get("/properties", options)
       end
 
+      # Public: Returns a list of properties.
+      # Find more at {http://dev.lelylan.com/rest/properties/properties/#all Lelylan Dev Center}.
+      #
+      # options - The Hash option used to refine the search (default: {}). 
+      #           Check out the {http://dev.lelylan.com/rest/properties/properties/#all API doc} for the accepted options.
+      # 
+      # Returns Hashie List of properties.
+      #
+      # Examples
+      # 
+      #   # Retrurns the first 10 properties
+      #   client.properties(per: 10)
+      #
+      #   # Returns the properties where the name match with the desired string
+      #   client.properties(name: 'Intensity')
+      #
+      def public_properties(options = {})
+        get("/properties/public", options)
+      end
+
       # Public: Create a property and returns extended information for it.
       # Find more at {http://dev.lelylan.com/rest/types/properties/#create Lelylan Dev Center}.
       #

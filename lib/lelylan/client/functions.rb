@@ -38,6 +38,23 @@ module Lelylan
         get("/functions", options)
       end
 
+      # Public: Returns a list of all public functions.
+      # Find more at {http://dev.lelylan.com/rest/functions/core/#all Lelylan Dev Center}.
+      #
+      # options - The Hash option used to refine the search (default: {}). 
+      #           Check out the {http://dev.lelylan.com/rest/devices/functions/#all API doc} for the accepted options.
+      # 
+      # Returns Hashie List of functions.
+      #
+      # Examples
+      # 
+      #   # Retrurns the first 10 public functions
+      #   client.public_functions(per: 10)
+      #
+      def public_functions(options = {})
+        get("/functions/public", options)
+      end
+
       # Public: Create a function and returns extended information for it.
       # Find more at {http://dev.lelylan.com/rest/types/functions/#create Lelylan Dev Center}.
       #

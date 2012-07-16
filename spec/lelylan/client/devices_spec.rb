@@ -7,6 +7,34 @@ describe Lelylan::Client::Devices do
   end
 
 
+  describe ".device" do
+
+    let(:path) do
+      "/devices/4dcb9e23d033a9088900000a"
+    end
+
+    let(:uri) do
+      "http://api.lelylan.com/#{path}"
+    end
+
+    before do
+      stub_get(path).to_return(body: fixture("device.json"))
+    end
+
+    let!(:device) do
+      client.device(uri)
+    end
+
+    it "returns the device" do
+      device.uri.should_not be_nil
+    end
+
+    it "sends the request" do
+      a_get(path).should have_been_made
+    end
+  end
+
+
   describe ".devices" do
 
     let(:path) do
@@ -42,34 +70,6 @@ describe Lelylan::Client::Devices do
       it "sends the params" do
         a_get(path).with(query: {per: "25"}).should have_been_made
       end
-    end
-  end
-
-
-  describe ".device" do
-
-    let(:path) do
-      "/devices/4dcb9e23d033a9088900000a"
-    end
-
-    let(:uri) do
-      "http://api.lelylan.com/#{path}"
-    end
-
-    before do
-      stub_get(path).to_return(body: fixture("device.json"))
-    end
-
-    let!(:device) do
-      client.device(uri)
-    end
-
-    it "returns the device" do
-      device.uri.should_not be_nil
-    end
-
-    it "sends the request" do
-      a_get(path).should have_been_made
     end
   end
 

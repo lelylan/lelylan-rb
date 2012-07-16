@@ -2,6 +2,23 @@ module Lelylan
   class Client
     module Devices
 
+      # Public: Returns extended information for a given device
+      # identified from its URI.
+      # Find more at {http://dev.lelylan.com/rest/devices/core/#get Lelylan Dev Center}.
+      #
+      # device - A String that represent the device URI.
+      #
+      # Returns Hashie The device.
+      #
+      # Examples
+      #
+      #   device = "http://api.lelylan.com/devices/4dcb9e23d033a9088900000a"
+      #   client.device(device)
+      #
+      def device(device)
+        get("/devices/#{find_id(device)}")
+      end
+
       # Public: Returns a list of owned devices.
       # Find more at {http://dev.lelylan.com/rest/devices/core/#all Lelylan Dev Center}.
       #
@@ -24,23 +41,6 @@ module Lelylan
       #
       def devices(options = {})
         get("/devices", options)
-      end
-
-      # Public: Returns extended information for a given device
-      # identified from its URI.
-      # Find more at {http://dev.lelylan.com/rest/devices/core/#get Lelylan Dev Center}.
-      #
-      # device - A String that represent the device URI.
-      #
-      # Returns Hashie The device.
-      #
-      # Examples
-      #
-      #   device = "http://api.lelylan.com/devices/4dcb9e23d033a9088900000a"
-      #   client.device(device)
-      #
-      def device(device)
-        get("/devices/#{find_id(device)}")
       end
 
       # Public: Create a device and returns extended information for it.

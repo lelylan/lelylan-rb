@@ -7,6 +7,34 @@ describe Lelylan::Client::Types do
   end
 
 
+  describe ".type" do
+
+    let(:path) do
+      "/types/4dcb9e23d033a9088900000a"
+    end
+
+    let(:uri) do
+      "http://api.lelylan.com/#{path}"
+    end
+
+    before do
+      stub_get(path).to_return(body: fixture("type.json"))
+    end
+
+    let!(:type) do
+      client.type(uri)
+    end
+
+    it "returns the type" do
+      type.uri.should_not be_nil
+    end
+
+    it "sends the request" do
+      a_get(path).should have_been_made
+    end
+  end
+
+
   describe ".types" do
 
     let(:path) do
@@ -14,7 +42,7 @@ describe Lelylan::Client::Types do
     end
 
     before do
-      stub_get("/types").to_return(body: fixture("types.json"))
+      stub_get(path).to_return(body: fixture("types.json"))
     end
 
     let!(:types) do
@@ -46,30 +74,31 @@ describe Lelylan::Client::Types do
   end
 
 
-  describe ".type" do
+  describe ".public_types" do
 
     let(:path) do
-      "/types/4dcb9e23d033a9088900000a"
-    end
-
-    let(:uri) do
-      "http://api.lelylan.com/#{path}"
+      "/types/public"
     end
 
     before do
-      stub_get(path).to_return(body: fixture("type.json"))
+      client.user     = nil
+      client.password = nil
     end
 
-    let!(:type) do
-      client.type(uri)
+    before do
+      stub_get(path).to_return(body: fixture("types.json"))
     end
 
-    it "returns the type" do
-      type.uri.should_not be_nil
+    let!(:types) do
+      client.public_types
+    end
+
+    it "returns a list of types" do
+      types.should have(1).item
     end
 
     it "sends the request" do
-      a_get(path).should have_been_made
+      a_get('http://api.lelylan.com/types/public').should have_been_made
     end
   end
 

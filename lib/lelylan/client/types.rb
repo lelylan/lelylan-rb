@@ -18,7 +18,7 @@ module Lelylan
         get("/types/#{find_id(type)}")
       end
 
-      # Public: Returns a list of types.
+      # Public: Returns a list of owned types.
       # Find more at {http://dev.lelylan.com/rest/types/core/#all Lelylan Dev Center}.
       #
       # options - The Hash option used to refine the search (default: {}). 
@@ -36,6 +36,23 @@ module Lelylan
       #
       def types(options = {})
         get("/types", options)
+      end
+
+      # Public: Returns a list of all public types.
+      # Find more at {http://dev.lelylan.com/rest/types/core/#all Lelylan Dev Center}.
+      #
+      # options - The Hash option used to refine the search (default: {}). 
+      #           Check out the {http://dev.lelylan.com/rest/devices/types/#all API doc} for the accepted options.
+      # 
+      # Returns Hashie List of types.
+      #
+      # Examples
+      # 
+      #   # Retrurns the first 10 public types
+      #   client.public_types(per: 10)
+      #
+      def public_types(options = {})
+        get("/types/public", options)
       end
 
       # Public: Create a type and returns extended information for it.

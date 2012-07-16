@@ -38,6 +38,23 @@ module Lelylan
         get("/statuses", options)
       end
 
+      # Public: Returns a list of all public statuses.
+      # Find more at {http://dev.lelylan.com/rest/statuses/core/#all Lelylan Dev Center}.
+      #
+      # options - The Hash option used to refine the search (default: {}). 
+      #           Check out the {http://dev.lelylan.com/rest/devices/statuses/#all API doc} for the accepted options.
+      # 
+      # Returns Hashie List of statuses.
+      #
+      # Examples
+      # 
+      #   # Retrurns the first 10 public statuses
+      #   client.public_statuses(per: 10)
+      #
+      def public_statuses(options = {})
+        get("/statuses/public", options)
+      end
+
       # Public: Create a status and returns extended information for it.
       # Find more at {http://dev.lelylan.com/rest/types/statuses/#create Lelylan Dev Center}.
       #
