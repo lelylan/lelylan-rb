@@ -1,16 +1,16 @@
 require "helper"
 
-describe Lelylan::Client::Consumptions do
+describe Lelylan::Client::Locations do
 
   let(:client) do
     a_client
   end
 
 
-  describe ".consumption" do
+  describe ".location" do
 
     let(:path) do
-      "/consumptions/4dcb9e23d033a9088900000a"
+      "/locations/4dcb9e23d033a9088900000a"
     end
 
     let(:uri) do
@@ -18,15 +18,15 @@ describe Lelylan::Client::Consumptions do
     end
 
     before do
-      stub_get(path).to_return(body: fixture("consumption.json"))
+      stub_get(path).to_return(body: fixture("location.json"))
     end
 
-    let!(:consumption) do
-      client.consumption(uri)
+    let!(:location) do
+      client.location(uri)
     end
 
-    it "returns the consumption" do
-      consumption.uri.should_not be_nil
+    it "returns the location" do
+      location.uri.should_not be_nil
     end
 
     it "sends the request" do
@@ -35,22 +35,22 @@ describe Lelylan::Client::Consumptions do
   end
 
 
-  describe ".consumptions" do
+  describe ".locations" do
 
     let(:path) do
-      "/consumptions"
+      "/locations"
     end
 
     before do
-      stub_get("/consumptions").to_return(body: fixture("consumptions.json"))
+      stub_get("/locations").to_return(body: fixture("locations.json"))
     end
 
-    let!(:consumptions) do
-      client.consumptions
+    let!(:locations) do
+      client.locations
     end
 
-    it "returns a list of consumptions" do
-      consumptions.should have(1).item
+    it "returns a list of locations" do
+      locations.should have(1).item
     end
 
     it "sends the request" do
@@ -60,11 +60,11 @@ describe Lelylan::Client::Consumptions do
     context "with params" do
 
       before do
-        stub_get(path).with(query: {per: "25"}).to_return(body: fixture("consumption.json"))
+        stub_get(path).with(query: {per: "25"}).to_return(body: fixture("location.json"))
       end
 
       before do
-        client.consumptions(per: 25)
+        client.locations(per: 25)
       end
 
       it "sends the params" do
@@ -74,22 +74,22 @@ describe Lelylan::Client::Consumptions do
   end
 
 
-  describe ".create_consumption" do
+  describe ".create_location" do
 
     let(:path) do
-      "/consumptions"
+      "/locations"
     end
 
     before do
-      stub_post(path).with(body: {name: "Dimmer"}).to_return(body: fixture("consumption.json"))
+      stub_post(path).with(body: {name: "Dimmer"}).to_return(body: fixture("location.json"))
     end
 
-    let!(:consumption) do
-      client.create_consumption(name: "Dimmer")
+    let!(:location) do
+      client.create_location(name: "Dimmer")
     end
 
-    it "returns the consumption" do
-      consumption.uri.should_not be_nil
+    it "returns the location" do
+      location.uri.should_not be_nil
     end
 
     it "sends the request" do
@@ -98,10 +98,10 @@ describe Lelylan::Client::Consumptions do
   end
 
 
-  describe ".update_consumption" do
+  describe ".update_location" do
 
     let(:path) do
-      "/consumptions/4dcb9e23d033a9088900000a"
+      "/locations/4dcb9e23d033a9088900000a"
     end
 
     let(:uri) do
@@ -109,15 +109,15 @@ describe Lelylan::Client::Consumptions do
     end
 
     before do
-      stub_put(path).with(body: {name: "Dimmer"}).to_return(body: fixture("consumption.json"))
+      stub_put(path).with(body: {name: "Dimmer"}).to_return(body: fixture("location.json"))
     end
 
-    let!(:consumption) do
-      client.update_consumption(uri, name: "Dimmer")
+    let!(:location) do
+      client.update_location(uri, name: "Dimmer")
     end
 
-    it "returns the consumption" do
-      consumption.uri.should_not be_nil
+    it "returns the location" do
+      location.uri.should_not be_nil
     end
 
     it "sends the request" do
@@ -126,10 +126,10 @@ describe Lelylan::Client::Consumptions do
   end
 
 
-  describe ".delete_consumption" do
+  describe ".delete_location" do
 
     let(:path) do
-      "/consumptions/4dcb9e23d033a9088900000a"
+      "/locations/4dcb9e23d033a9088900000a"
     end
 
     let(:uri) do
@@ -137,15 +137,15 @@ describe Lelylan::Client::Consumptions do
     end
 
     before do
-      stub_delete(path).to_return(body: fixture("consumption.json"))
+      stub_delete(path).to_return(body: fixture("location.json"))
     end
 
-    let!(:consumption) do
-      client.delete_consumption(uri)
+    let!(:location) do
+      client.delete_location(uri)
     end
 
-    it "returns the consumption" do
-      consumption.uri.should_not be_nil
+    it "returns the location" do
+      location.uri.should_not be_nil
     end
 
     it "sends the request" do

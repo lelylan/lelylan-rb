@@ -9,12 +9,12 @@ Ruby wrapper for [Lelylan REST APIs](http://dev.lelylan.com)
 
 Or if you are using bundler 
 
-    gem 'lelylan_rb'
+    gem "lelylan_rb"
 
 
 ## Resources
 
-[RDoc documentation](http://rdoc.info/gems/lelylan.rb)
+[Ruby gem documentation](http://rdoc.info/gems/lelylan.rb)
 
 [Lelylan REST APIs](http://dev.lelylan.com)
 
@@ -23,18 +23,18 @@ Or if you are using bundler
 
 For methods that require authentication, you'll need to setup a client with your login and password
 
-    require 'rubygems'
-    require 'lelylan_rb'
+    require "rubygems"
+    require "lelylan_rb"
 
-    @client = Lelylan::Client.new(user: 'USERNAME', password: 'PASSWORD')
+    @client = Lelylan::Client.new(user: "USERNAME", password: "PASSWORD")
 
 To use with Lelylan Enterprise you'll need to set the API endpoints before instantiating a client.
 
     Lelylan.configure do |config|
-      config.api_endpoint = 'https://lelylan.house.com'
+      config.api_endpoint = "https://lelylan.house.com"
     end
 
-    @client = Lelylan::Client.new(user: 'USERNAME', password: 'PASSWORD')
+    @client = Lelylan::Client.new(user: "USERNAME", password: "PASSWORD")
 
 ## Examples
 
@@ -48,17 +48,32 @@ Get a device based on its URI.
 
 Search a device type based on its name.
 
-    client.types(name: 'Dimmer').first
+    client.types(name: "Dimmer").first
 
 Create a device (in this case we suppose the type is a dimmer)
 
-    device = client.create_device(name: 'Closet dimmer', type_uri: dimmer.uri)
+    device = client.create_device(name: "Closet dimmer", type_uri: dimmer.uri)
 
 Execute a function.
 
     client.execute(device.uri, function.uri)
 
-Learn more reading the [RDoc documentation](http://rdoc.info/gems/lelylan.rb) and the [Lelylan REST APIs](http://dev.lelylan.com).
+
+## More examples
+
+For more examples check out the [ruby gem documentation](http://rdoc.info/gems/lelylan.rb).
+
+* [Device examples](docs/Lelylan/Client/Devices)
+* [Consumption examples](docs/Lelylan/Client/Consumptions)
+* [Hisotry examples](docs/Lelylan/Client/Histories)
+* [Types examples](docs/Lelylan/Client/Types)
+* [Properties examples](docs/Lelylan/Client/Properties)
+* [Functions examples](docs/Lelylan/Client/Functions)
+* [Statuses examples](docs/Lelylan/Client/Statuses)
+* [Categories examples](docs/Lelylan/Client/Categories)
+* [Locations examples](docs/Lelylan/Client/Locations)
+
+
 
 
 ## Errors
@@ -77,7 +92,7 @@ Exceptions are raised when a 4xx or 5xx status code is returned.
 Through the error message attribute you can access the error information.
 
     begin
-      @type = Lelylan::Type.type(https://type.lelylan.com/types/not_existing_uri)
+      @type = Lelylan::Type.type("https://type.lelylan.com/types/not_existing_uri")
     rescue Lelylan::NotFound => e
       puts "The resource #{e.message.error.uri} was not found"
     end

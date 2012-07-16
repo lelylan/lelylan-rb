@@ -1,0 +1,18 @@
+[{
+    "uri": "http://www.example.com/locations/1",
+    "id": "1",
+    "name": "House",
+    "type": "house",
+    "created_at": "2012-07-16T17:04:10Z",
+    "updated_at": "2012-07-16T17:04:10Z",
+    "locations": {
+        "parent": null,
+        "children": [],
+        "ancestors": [],
+        "descendants": []
+    },
+    "devices": {
+        "children": [],
+        "descendants": []
+    }
+}]

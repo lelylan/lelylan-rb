@@ -1,0 +1,55 @@
+{
+    "uri": "http://www.example.com/locations/1",
+    "id": "1",
+    "name": "Floor",
+    "type": "floor",
+    "created_at": "2012-07-16T17:04:14Z",
+    "updated_at": "2012-07-16T17:04:14Z",
+    "locations": {
+        "parent": {
+            "uri": "http://www.example.com/locations/2"
+        },
+        "children": [{
+            "uri": "http://www.example.com/locations/4"
+        }],
+        "ancestors": [{
+            "uri": "http://www.example.com/locations/3"
+        },
+        {
+            "uri": "http://www.example.com/locations/2"
+        }],
+        "descendants": [{
+            "uri": "http://www.example.com/locations/4"
+        },
+        {
+            "uri": "http://www.example.com/locations/5"
+        }]
+    },
+    "devices": {
+        "children": [{
+            "uri": {
+                "uri": "https://device.lelylan.com/devices/closet-dimmer"
+            }
+        },
+        {
+            "uri": {
+                "uri": "https://device.lelylan.com/devices/another-closet-dimmer"
+            }
+        }],
+        "descendants": [{
+            "uri": {
+                "uri": "https://device.lelylan.com/devices/closet-dimmer"
+            }
+        },
+        {
+            "uri": {
+                "uri": "https://device.lelylan.com/devices/another-closet-dimmer"
+            }
+        },
+        {
+            "uri": {
+                "uri": "https://device.lelylan.com/devices/descendant-closet-dimmer"
+            }
+        }]
+    }
+}
