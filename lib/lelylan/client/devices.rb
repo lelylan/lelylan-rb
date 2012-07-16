@@ -19,7 +19,7 @@ module Lelylan
       #   client.devices(per: 10)
       #
       #   # Returns the devices of a specific type
-      #   type = "http://api.lelyla.com/types/4dcb9e23d033a9088900023a"
+      #   type = "http://api.lelylan.com/types/4dcb9e23d033a9088900023a"
       #   client.devices(type: type)
       #
       def devices(options = {})

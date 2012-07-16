@@ -3,8 +3,8 @@ require 'lelylan/connection'
 require 'lelylan/request'
 
 require 'lelylan/client/devices'
-#require 'lelylan/client/consumptions'
-#require 'lelylan/client/histories'
+require 'lelylan/client/consumptions'
+require 'lelylan/client/histories'
 #require 'lelylan/client/types'
 #require 'lelylan/client/properties'
 #require 'lelylan/client/functions'
@@ -32,8 +32,8 @@ module Lelylan
     include Lelylan::Request
 
     include Lelylan::Client::Devices
-    #include Lelylan::Client::Consumptions
-    #include Lelylan::Client::Histories
+    include Lelylan::Client::Consumptions
+    include Lelylan::Client::Histories
     #include Lelylan::Client::Types
     #include Lelylan::Client::Properties
     #include Lelylan::Client::Functions
