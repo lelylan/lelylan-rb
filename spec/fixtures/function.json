@@ -1,0 +1,15 @@
+{
+    "uri": "http://www.example.com/functions/500425ffd033a9b4ac0002e5",
+    "id": "500425ffd033a9b4ac0002e5",
+    "name": "Set intensity",
+    "created_at": "2012-07-16T14:32:31Z",
+    "updated_at": "2012-07-16T14:32:31Z",
+    "properties": [{
+        "uri": "http://www.example.com/properties/status",
+        "value": "on"
+    },
+    {
+        "uri": "http://www.example.com/properties/intensity",
+        "value": "0"
+    }]
+}

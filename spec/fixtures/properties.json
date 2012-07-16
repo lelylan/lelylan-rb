@@ -1,0 +1,9 @@
+[{
+    "uri": "http://www.example.com/properties/50042603d033a9b4ac000360",
+    "id": "50042603d033a9b4ac000360",
+    "name": "Status",
+    "default": "off",
+    "values": ["on", "off"],
+    "created_at": "2012-07-16T14:32:35Z",
+    "updated_at": "2012-07-16T14:32:35Z"
+}]

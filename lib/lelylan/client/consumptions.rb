@@ -48,7 +48,7 @@ module Lelylan
       #
       # Examples
       # 
-      #   device = "http://api.lelyla.com/devices/4dcb9e23d033a9088900000a"
+      #   device = "http://api.lelylan.com/devices/4dcb9e23d033a9088900000a"
       #   client.create_conumption(device: device, value: 0.05, occur_at: "2025-08-17 07:50:16 +0200", duration: "1")
       #
       def create_consumption(options = {})
@@ -66,7 +66,7 @@ module Lelylan
       #
       # Examples
       # 
-      #   consumption = "http://api.lelyla.com/consumptions/4dcb9e23d033a9088902200a"
+      #   consumption = "http://api.lelylan.com/consumptions/4dcb9e23d033a9088902200a"
       #   client.update_consumption(consumption, value: '0.04')
       #
       def update_consumption(consumption, options = {})
