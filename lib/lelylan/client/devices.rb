@@ -116,7 +116,7 @@ module Lelylan
         put("/devices/#{find_id(device)}/functions?uri=#{function}", options)
       end
 
-      # Public: Update properties on a device identified from its ID and returns extended representation for it.
+      # Public: Update properties on a device identified from its URI and returns extended representation for it.
       # Find more at {http://dev.lelylan.com/rest/devices/properties/#update Lelylan Dev Center}.
       #
       # device - A String that represent the device URI.
@@ -141,7 +141,6 @@ module Lelylan
       #
       # device - A String that represent the device URI.
       # options - The Hash option containing the physcial device to connect (default: {}). Check out the {http://dev.lelylan.com/rest/devices/physical/#update API doc} for the accepted options.
-      #           :uri - A String that represent the physical device URI.
       # 
       # Returns Hashie The device with the connected physical device.
       #
@@ -170,6 +169,42 @@ module Lelylan
       #
       def disconnect_physical(device, options={})
         delete("/devices/#{find_id(device)}/physical")
+      end
+
+      # Public: Returns the pending resource for a given device identified from its URI.
+      # Find more at {http://dev.lelylan.com/rest/devices/pending/#get Lelylan Dev Center}.
+      #
+      # device - A String that represent the device URI.
+      # 
+      # Returns Hashie The pending resource. What does {http://dev.lelylan.com/rest/devices/pending/ pending} mean?
+      #
+      # Examples
+      #
+      #   device = "http://api.lelyla.com/devices/4dcb9e23d033a9088900000a"
+      #   client.pending(device)
+      #
+      def pending(device)
+        get("/devices/#{find_id(device)}/pending")
+      end
+
+      # Public: Update the pending resource for a given device identified from its URI.
+      # Find more at {http://dev.lelylan.com/rest/devices/pending/#update Lelylan Dev Center}.
+      #
+      # device - A String that represent the device URI.
+      # pending - A String that represent the pending phase (start, update and close).
+      # options - The Hash option used to update the resource properties (default: {}). 
+      #           Check out the {http://dev.lelylan.com/rest/devices/properties/#update API doc} for the accepted options.
+      #
+      # Returns Hashie The updated pending resource. What does {http://dev.lelylan.com/rest/devices/pending/ pending} mean?
+      #
+      # Examples
+      #
+      #   device     = "http://api.lelyla.com/devices/4dcb9e23d033a9088900000a"
+      #   properties = [{uri: "http://api.lelylan.com/functions/4dcb9e23d033a9088900020a", value: "50"}]
+      #   client.update_pending(device, 'start', properties: properties)
+      #
+      def update_pending(device, options={})
+        put("/devices/#{find_id(device)}/pending", options)
       end
     end
   end

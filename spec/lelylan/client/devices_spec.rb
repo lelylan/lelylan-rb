@@ -280,4 +280,64 @@ describe Lelylan::Client::Devices do
       a_delete("#{path}/physical").should have_been_made
     end
   end
+
+
+  describe ".pending" do
+
+    let(:path) do
+      "/devices/4dcb9e23d033a9088900000a"
+    end
+
+    let(:uri) do
+      "http://api.lelylan.com/#{path}"
+    end
+
+    before do
+      stub_get("#{path}/pending").to_return(body: fixture("pending.json"))
+    end
+
+    let!(:device) do
+      client.pending(uri)
+    end
+
+    it "returns the pending resource" do
+      device.uri.should_not be_nil
+    end
+
+    it "sends the request" do
+      a_get("#{path}/pending").should have_been_made
+    end
+  end
+
+
+  describe ".update_pending" do
+
+    let(:path) do
+      "/devices/4dcb9e23d033a9088900000a"
+    end
+
+    let(:properties) do
+      [{uri: "http://api.lelylan.com/properties/4dcb9e23d033a9088900020a", value: "50"}]
+    end
+
+    let(:uri) do
+      "http://api.lelylan.com/#{path}"
+    end
+
+    before do
+      stub_put("#{path}/pending").with(body: {properties: properties}).to_return(body: fixture("pending.json"))
+    end
+
+    let!(:device) do
+      client.update_pending(uri, properties: properties)
+    end
+
+    it "returns the updated device" do
+      device.uri.should_not be_nil
+    end
+
+    it "sends the request" do
+      a_put("#{path}/pending").with(body: {properties: properties}).should have_been_made
+    end
+  end
 end
