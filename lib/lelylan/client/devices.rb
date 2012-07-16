@@ -30,7 +30,7 @@ module Lelylan
       # identified from its URI.
       # Find more at {http://dev.lelylan.com/rest/devices/core/#get Lelylan Dev Center}.
       #
-      # uri - A String that represent the device URI.
+      # device - A String that represent the device URI.
       #
       # Returns Hashie The device.
       #
@@ -39,14 +39,13 @@ module Lelylan
       #   device = "http://api.lelylan.com/devices/4dcb9e23d033a9088900000a"
       #   client.device(device)
       #
-      def device(uri)
-        get("/devices/#{find_id(uri)}")
+      def device(device)
+        get("/devices/#{find_id(device)}")
       end
 
       # Public: Create a device and returns extended information for it.
       # Find more at {http://dev.lelylan.com/rest/devices/core/#create Lelylan Dev Center}.
       #
-      # uri - A String that represent the device URI.
       # options - The Hash option used to create the resource (default: {}). 
       #           Check out the {http://dev.lelylan.com/rest/devices/core/#create API doc} for the accepted options.
       # 
@@ -64,6 +63,7 @@ module Lelylan
       # Public: Update a device identified from its URI and returns extended information for it.
       # Find more at {http://dev.lelylan.com/rest/devices/core/#update Lelylan Dev Center}.
       #
+      # device - A String that represent the device URI.
       # options - The Hash option used to update the resource (default: {}). 
       #           Check out the {http://dev.lelylan.com/rest/devices/core/#update API doc} for the accepted options.
       # 
@@ -74,14 +74,14 @@ module Lelylan
       #   device = "http://api.lelyla.com/devices/4dcb9e23d033a9088900000a"
       #   client.update_device(device, name: 'Closed dimmer')
       #
-      def update_device(uri, options = {})
-        put("/devices/#{find_id(uri)}", options)
+      def update_device(device, options = {})
+        put("/devices/#{find_id(device)}", options)
       end
 
       # Public: Delete a device identified from its URI and returns extended information for it.
       # Find more at {http://dev.lelylan.com/rest/devices/core/#delete Lelylan Dev Center}.
       #
-      # uri - A String that represent the device URI.
+      # device - A String that represent the device URI.
       # 
       # Returns Hashie The deleted device.
       #
@@ -90,8 +90,50 @@ module Lelylan
       #   device = "http://api.lelyla.com/devices/4dcb9e23d033a9088900000a"
       #   client.delete_device(device)
       #
-      def delete_device(uri)
-        delete("/devices/#{find_id(uri)}")
+      def delete_device(device)
+        delete("/devices/#{find_id(device)}")
+      end
+
+      # Public: Execute a function on a device identified from its URI and returns extended representation for it.
+      # Find more at {http://dev.lelylan.com/rest/devices/functions/#update Lelylan Dev Center}.
+      #
+      # device - A String that represent the device URI.
+      # function - A string that represent the function URI to execute
+      # options - The Hash option used to update the resource properties (default: {}). 
+      #           Check out the {http://dev.lelylan.com/rest/devices/functions/#update API doc} for the accepted options.
+      # 
+      # Returns Hashie The device with the updated properties.
+      #
+      # Examples
+      #
+      #   device     = "http://api.lelyla.com/devices/4dcb9e23d033a9088900000a"
+      #   function   = "http://api.lelyla.com/functions/4dcb9e23d033a9088900020a"
+      #   properties = [{uri: "http://api.lelylan.com/functions/4dcb9e23d033a9088900020a", value: "50"}]
+      #
+      #   client.execute(device, function, properties: properties)
+      #
+      def execute(device, function, options={})
+        put("/devices/#{find_id(device)}/functions?uri=#{function}", options)
+      end
+
+      # Public: Update properties on a device identified from its ID and returns extended representation for it.
+      # Find more at {http://dev.lelylan.com/rest/devices/properties/#update Lelylan Dev Center}.
+      #
+      # device - A String that represent the device URI.
+      # options - The Hash option used to update the resource properties (default: {}). 
+      #           Check out the {http://dev.lelylan.com/rest/devices/properties/#update API doc} for the accepted options.
+      # 
+      # Returns Hashie The device with the updated properties.
+      #
+      # Examples
+      #
+      #   device     = "http://api.lelyla.com/devices/4dcb9e23d033a9088900000a"
+      #   properties = [{uri: "http://api.lelylan.com/functions/4dcb9e23d033a9088900020a", value: "50"}]
+      #
+      #   client.update_properties(device, function, properties: properties)
+      #
+      def update_properties(device, options={})
+        put("/devices/#{find_id(device)}/properties", options)
       end
     end
   end

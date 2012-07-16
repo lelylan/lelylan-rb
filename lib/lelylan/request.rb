@@ -59,7 +59,7 @@ module Lelylan
         when :delete, :get
           request.url(path, options)
         when :patch, :post, :put
-          request.path = path
+          request.url(path)
           request.body = options unless options.empty?
         end
       end

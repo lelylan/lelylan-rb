@@ -81,7 +81,7 @@ describe Lelylan::Client::Devices do
     end
 
     before do
-      stub_post(path).with(name: "Dimmer").to_return(body: fixture("device.json"))
+      stub_post(path).with(body: {name: "Dimmer"}).to_return(body: fixture("device.json"))
     end
 
     let!(:device) do
@@ -93,7 +93,7 @@ describe Lelylan::Client::Devices do
     end
 
     it "sends the request" do
-      a_post(path).with({name: "Dimmer"}).should have_been_made
+      a_post(path).with(body: {name: "Dimmer"}).should have_been_made
     end
   end
 
@@ -109,7 +109,7 @@ describe Lelylan::Client::Devices do
     end
 
     before do
-      stub_put(path).with(name: "Dimmer").to_return(body: fixture("device.json"))
+      stub_put(path).with(body: {name: "Dimmer"}).to_return(body: fixture("device.json"))
     end
 
     let!(:device) do
@@ -121,7 +121,7 @@ describe Lelylan::Client::Devices do
     end
 
     it "sends the request" do
-      a_put(path).with({name: "Dimmer"}).should have_been_made
+      a_put(path).with(body: {name: "Dimmer"}).should have_been_made
     end
   end
 
@@ -150,6 +150,74 @@ describe Lelylan::Client::Devices do
 
     it "sends the request" do
       a_delete(path).should have_been_made
+    end
+  end
+
+
+  describe ".execute" do
+
+    let(:path) do
+      "/devices/4dcb9e23d033a9088900000a"
+    end
+
+    let(:function) do
+      "http://api.lelylan.com/functions/4dcb9e23d033a9088900020a"
+    end
+
+    let(:properties) do
+      [{uri: "http://api.lelylan.com/properties/4dcb9e23d033a9088900020a", value: "50"}]
+    end
+
+    let(:uri) do
+      "http://api.lelylan.com/#{path}"
+    end
+
+    before do
+      stub_put("#{path}/functions").with(query: {uri: function}).with(body: {properties: properties}).to_return(body: fixture("device.json"))
+    end
+
+    let!(:device) do
+      client.execute(uri, function, properties: properties)
+    end
+
+    it "returns the updated device" do
+      device.uri.should_not be_nil
+    end
+
+    it "sends the request" do
+      a_put("#{path}/functions").with(query: {uri: function}).with(body: {properties: properties}).should have_been_made
+    end
+  end
+
+
+  describe ".update_properties" do
+
+    let(:path) do
+      "/devices/4dcb9e23d033a9088900000a"
+    end
+
+    let(:properties) do
+      [{uri: "http://api.lelylan.com/properties/4dcb9e23d033a9088900020a", value: "50"}]
+    end
+
+    let(:uri) do
+      "http://api.lelylan.com/#{path}"
+    end
+
+    before do
+      stub_put("#{path}/properties").with(body: {properties: properties}).to_return(body: fixture("device.json"))
+    end
+
+    let!(:device) do
+      client.update_properties(uri, properties: properties)
+    end
+
+    it "returns the updated device" do
+      device.uri.should_not be_nil
+    end
+
+    it "sends the request" do
+      a_put("#{path}/properties").with(body: {properties: properties}).should have_been_made
     end
   end
 end
