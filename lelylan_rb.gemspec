@@ -24,8 +24,8 @@ Gem::Specification.new do |gem|
   gem.description = %q{Ruby wrapper for Lelylan REST APIs}
   gem.email = ['touch@lelylan.com']
   gem.files = `git ls-files`.split("\n")
-  gem.homepage = 'https://github.com/lelylan/lelylan_rb'
-  gem.name = 'lelylan_rb'
+  gem.homepage = 'https://github.com/lelylan/lelylan-rb'
+  gem.name = 'lelylan-rb'
   gem.platform = Gem::Platform::RUBY
   gem.require_paths = ['lib']
   gem.required_rubygems_version = Gem::Requirement.new('>= 1.3.6')

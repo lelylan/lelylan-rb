@@ -10,10 +10,12 @@ task :default => :spec
 namespace :doc do
   require 'yard'
   YARD::Rake::YardocTask.new do |task|
-    task.files   = ['README.md', 'LICENSE.md', 'lib/**/*.rb']
+    task.files   = ['README.md', 'CHANGELOG.md', 'lib/lelylan/client/**/*.rb']
     task.options = [
-      '--output-dir', 'doc/yard',
+      '--plugin', 'yard-tomdoc',
+      '--markup-provider', 'redcarpet',
       '--markup', 'markdown',
+      '--output-dir', 'doc/yard'
     ]
   end
 end

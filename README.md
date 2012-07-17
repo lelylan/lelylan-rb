@@ -5,16 +5,16 @@ Ruby wrapper for [Lelylan REST APIs](http://dev.lelylan.com)
 
 ## Installation
 
-    gem install lelylan_rb
+    gem install lelylan-rb
 
 Or if you are using bundler 
 
-    gem "lelylan_rb"
+    gem "lelylan-rb"
 
 
 ## Resources
 
-[Ruby gem documentation](http://rdoc.info/gems/lelylan.rb)
+[Ruby gem documentation](http://rdoc.info/gems/lelylan-rb)
 
 [Lelylan REST APIs](http://dev.lelylan.com)
 
@@ -24,7 +24,7 @@ Or if you are using bundler
 For methods that require authentication, you'll need to setup a client with your login and password
 
     require "rubygems"
-    require "lelylan_rb"
+    require "lelylan-rb"
 
     @client = Lelylan::Client.new(user: "USERNAME", password: "PASSWORD")
 
@@ -61,7 +61,7 @@ Execute a function.
 
 ## More examples
 
-For more examples check out the [ruby gem documentation](http://rdoc.info/gems/lelylan.rb).
+For more examples check out the [ruby gem documentation](http://rdoc.info/gems/lelylan-rb).
 
 * [Device examples](docs/Lelylan/Client/Devices)
 * [Consumption examples](docs/Lelylan/Client/Consumptions)
@@ -137,20 +137,20 @@ consistent, follow these rules.
 
 ## Feedback
 
-Use the [issue tracker](http://github.com/lelylan/lelylan_rb/issues) for any bug you find and write us a [mail](mailto:touch@lelylan.com)
+Use the [issue tracker](http://github.com/lelylan/lelylan-rb/issues) for any bug you find and write us a [mail](mailto:touch@lelylan.com)
 for any feature idea that can improve the project. Feedback is always welcome. Always.
 
 
 ## Links 
 
-* [GIT Repository](git://github.com/lelylan/lelylan_rb.git)
-* [Lelylan Dev Center](http://dev.lelylan.com/type)
+* [GIT Repository](http://github.com/lelylan/lelylan-rb)
+* [Lelylan Dev Center](http://dev.lelylan.com)
 * [Lelylan Site](http://lelylan.com)
 
 
 ## Authors
 
-[Andrea Reginato](twitter.com/andreareginato)
+[Andrea Reginato](http://twitter.com/andreareginato)
 
 
 ## Contributors
