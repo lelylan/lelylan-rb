@@ -9,7 +9,7 @@ Ruby wrapper for [Lelylan REST APIs](http://dev.lelylan.com)
 
 Or if you are using bundler 
 
-    gem "lelylan-rb"
+    gem "lelylan-rb", require: 'lelylan'
 
 
 ## Resources
