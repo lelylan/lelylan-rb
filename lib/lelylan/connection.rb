@@ -8,6 +8,7 @@ module Lelylan
     def connection(authenticate=true, raw=false, version=0, force_urlencoded=false)
 
       options = {
+        :headers => {'Accept' => 'application/json', 'User-Agent' => user_agent, 'Content-Type' => 'application/json'},
         :proxy => proxy,
         :ssl => { :verify => false },
         :url => Lelylan.api_endpoint,

@@ -8,6 +8,7 @@ module Lelylan
       :api_version,
       :api_endpoint,
       :web_endpoint,
+      :endpoint,
       :user,
       :password,
       :proxy,
@@ -44,6 +45,9 @@ module Lelylan
     def web_endpoint=(value)
       @web_endpoint = File.join(value, "")
     end
+
+    alias :endpoint= :api_endpoint=
+    alias :endpoint :api_endpoint
 
     def reset
       self.adapter        = DEFAULT_ADAPTER
