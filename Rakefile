@@ -15,7 +15,7 @@ namespace :doc do
       '--plugin', 'yard-tomdoc',
       '--markup-provider', 'redcarpet',
       '--markup', 'markdown',
-      '--output-dir', 'doc/yard'
+      '--output-dir', 'doc'
     ]
   end
 end

@@ -1,7 +1,7 @@
 module Lelylan
   class Version
-    MAJOR = 3 unless defined? MAJOR
-    MINOR = 1 unless defined? MINOR
+    MAJOR = 0 unless defined? MAJOR
+    MINOR = 0 unless defined? MINOR
     PATCH = 1 unless defined? PATCH
     PRE = nil unless defined? PRE
 
