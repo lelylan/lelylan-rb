@@ -28,6 +28,8 @@ module Lelylan
       Addressable::URI.parse(uri).basename
     end
 
+    alias :api_endpoint :endpoint
+
     # structure related
     include Lelylan::Authentication
     include Lelylan::Connection

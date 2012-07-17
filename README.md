@@ -31,7 +31,7 @@ For methods that require authentication, you'll need to setup a client with your
 To use with Lelylan Enterprise (work in progress) you'll need to set the API endpoints before instantiating a client.
 
     Lelylan.configure do |config|
-      config.api_endpoint = "https://lelylan.yourhouse.com"
+      config.endpoint = "https://lelylan.yourhouse.com"
     end
 
     @client = Lelylan::Client.new(user: "USERNAME", password: "PASSWORD")
@@ -39,7 +39,7 @@ To use with Lelylan Enterprise (work in progress) you'll need to set the API end
 Another way to reach the same result is accessing directly to the client object.
 
     @client = Lelylan::Client.new(user: "USERNAME", password: "PASSWORD")
-    @client.api_endpoint = "https://lelylan.yourhouse.com"
+    @client.endpoint = "https://lelylan.yourhouse.com"
 
 ## Examples
 

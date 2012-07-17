@@ -25,11 +25,11 @@ describe Lelylan::Client do
 
     it "sets default to http://api.lelylan.com" do
       client = Lelylan::Client.new
-      client.api_endpoint.should == 'http://api.lelylan.com/'
+      client.endpoint.should == 'http://api.lelylan.com/'
     end
 
     it "can be set" do
-      Lelylan.api_endpoint = 'http://lelylan.dev'
+      Lelylan.endpoint = 'http://lelylan.dev'
       client = Lelylan::Client.new
       client.api_endpoint.should == 'http://lelylan.dev/'
     end
