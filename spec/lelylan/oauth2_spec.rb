@@ -1,5 +1,4 @@
 require 'helper'
-require 'oauth2'
 
 describe OAuth2 do
 
@@ -34,8 +33,8 @@ describe OAuth2 do
     let(:headers)         { { 'Authorization' => "Bearer #{refresh_token['access_token']}" } }
 
     let(:refresh_body) {{
-      client_id:     client_id, 
-      client_secret: client_secret, 
+      client_id:     client_id,
+      client_secret: client_secret,
       grant_type:    'refresh_token',
       refresh_token: token.refresh_token
     }}
@@ -53,4 +52,3 @@ describe OAuth2 do
     end
   end
 end
-
