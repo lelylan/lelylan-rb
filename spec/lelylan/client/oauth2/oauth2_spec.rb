@@ -18,7 +18,7 @@ describe OAuth2 do
 
   context 'with not expired token' do
 
-    before { stub_get(path).with(headers: headers).to_return(body: fixture('function.json')) }
+    before { stub_get(path).with(headers: headers).to_return(body: fixture('type.json')) }
     before { client.type uri }
 
     it 'adds the oauth2 token in the header' do
@@ -28,23 +28,28 @@ describe OAuth2 do
 
   context 'with expired token' do
 
-    let(:refresh_uri)   { "#{site_uri}/oauth/token" }
-    let(:refresh_json)  { fixture('oauth2/refresh.json').read }
-    let(:refresh_body)  {{ 
+    let(:refresh_uri)     { "#{site_uri}/oauth/token" }
+    let(:refresh_token)   { MultiJson.load fixture('oauth2/refresh.json').read }
+    let(:refresh_headers) { { 'Content-Type' => 'application/json' } }
+    let(:headers)         { { 'Authorization' => "Bearer #{refresh_token['access_token']}" } }
+
+    let(:refresh_body) {{
       client_id:     client_id, 
       client_secret: client_secret, 
       grant_type:    'refresh_token',
       refresh_token: token.refresh_token
     }}
 
-    before { stub_post(refresh_uri).with(body: refresh_body).to_return(headers: {'Content-Type' => 'application/json'}, body: refresh_json) }
+    before { stub_post(refresh_uri).with(body: refresh_body).to_return(headers: refresh_headers, body: refresh_token) }
+    before { stub_get(path).with(headers: headers).to_return(body: fixture('type.json')) }
     before { token.instance_variable_set '@expires_at', 0 }
 
-    before { stub_get(path).with(headers: headers).to_return(body: fixture('function.json')) }
-    before { client.type uri }
+    it 'expires token' do
+      token.expired?.should == true
+    end
 
     it 'refreshes token' do
-      #a_get(path).with(headers: headers).should have_been_made
+      expect{ client.type uri }.to change{ client.token.token }
     end
   end
 end
