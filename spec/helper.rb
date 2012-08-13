@@ -60,13 +60,5 @@ def fixture(file)
 end
 
 def lelylan_url(url)
-  if url =~ /^http/
-    url
-  elsif client && client.authenticated?
-    "http://#{client.user}:#{client.password}@api.lelylan.com#{url}"
-  elsif client && client.oauthed?
-    "http://api.lelylan.com#{url}?access_token=#{client.oauth_token}"
-  else
-    "http://api.lelylan.com#{url}"
-  end
+  url =~ /^http/ ? url : "http://api.lelylan.com#{url}"
 end

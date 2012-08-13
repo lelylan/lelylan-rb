@@ -11,10 +11,14 @@ module Lelylan
         :headers => {'Accept' => 'application/json', 'User-Agent' => user_agent, 'Content-Type' => 'application/json'},
         :proxy => proxy,
         :ssl => { :verify => false },
-        :url => Lelylan.api_endpoint,
+        :url => Lelylan.api_endpoint
       }
 
-      options.merge!(:params => {:access_token => oauth_token}) if oauthed? && !authenticated?
+      if authenticated?
+        pp token.expired?
+        token.refresh! if token.expired?
+        options[:headers].merge!('Authorization' => "Bearer #{token.token}") 
+      end
 
       connection = Faraday.new(options) do |builder|
         builder.request :json
@@ -24,7 +28,6 @@ module Lelylan
         builder.adapter(adapter)
       end
 
-      connection.basic_auth authentication[:user], authentication[:password] if authenticate and authenticated?
       connection
     end
   end
