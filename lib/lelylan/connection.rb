@@ -15,7 +15,6 @@ module Lelylan
       }
 
       if authenticated?
-        pp token.expired?
         token.refresh! if token.expired?
         options[:headers].merge!('Authorization' => "Bearer #{token.token}") 
       end

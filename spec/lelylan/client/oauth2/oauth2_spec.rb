@@ -37,11 +37,11 @@ describe OAuth2 do
       refresh_token: token.refresh_token
     }}
 
-    before { stub_post(refresh_uri).with(body: refresh_body).to_return(body: refresh_json) }
+    before { stub_post(refresh_uri).with(body: refresh_body).to_return(headers: {'Content-Type' => 'application/json'}, body: refresh_json) }
     before { token.instance_variable_set '@expires_at', 0 }
 
     before { stub_get(path).with(headers: headers).to_return(body: fixture('function.json')) }
-    before { print refresh_json; client.type uri }
+    before { client.type uri }
 
     it 'refreshes token' do
       #a_get(path).with(headers: headers).should have_been_made
