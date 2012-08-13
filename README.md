@@ -62,9 +62,9 @@ Get a device based on its URI.
 
     client.device('http://api.lelylan.com/devices/:id')
 
-Search a device type based on its name.
+Search a device based on its name.
 
-    client.types(name: 'Dimmer').first
+    client.devices(name: 'Dimmer').first
 
 Create a device (in this case we suppose the type is a dimmer)
 
@@ -73,6 +73,12 @@ Create a device (in this case we suppose the type is a dimmer)
 Execute a function.
 
     client.execute(device.uri, function.uri)
+
+Get a public type based on its URI. Remember, when a resource is public the client
+with a token is not needed.
+
+    Lelylan.type('http://api.lelylan.com/types/:id')
+
 
 ## More examples
 
