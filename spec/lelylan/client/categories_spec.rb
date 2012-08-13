@@ -1,4 +1,4 @@
-require "helper"
+require 'helper'
 
 describe Lelylan::Client::Categories do
 
@@ -6,11 +6,10 @@ describe Lelylan::Client::Categories do
     a_client
   end
 
-
-  describe ".category" do
+  describe '.category' do
 
     let(:path) do
-      "/categories/4dcb9e23d033a9088900000a"
+      '/categories/4dcb9e23d033a9088900000a'
     end
 
     let(:uri) do
@@ -18,66 +17,64 @@ describe Lelylan::Client::Categories do
     end
 
     before do
-      stub_get(path).to_return(body: fixture("category.json"))
+      stub_get(path).to_return(body: fixture('category.json'))
     end
 
     let!(:category) do
       client.category(uri)
     end
 
-    it "returns the category" do
+    it 'returns the category' do
       category.uri.should_not be_nil
     end
 
-    it "sends the request" do
+    it 'sends the request' do
       a_get(path).should have_been_made
     end
   end
 
-
-  describe ".categories" do
+  describe '.categories' do
 
     let(:path) do
-      "/categories"
+      '/categories'
     end
 
     before do
-      stub_get("/categories").to_return(body: fixture("categories.json"))
+      stub_get('/categories').to_return(body: fixture('categories.json'))
     end
 
     let!(:categories) do
       client.categories
     end
 
-    it "returns a list of categories" do
+    it 'returns a list of categories' do
       categories.should have(1).item
     end
 
-    it "sends the request" do
+    it 'sends the request' do
       a_get(path).should have_been_made
     end
 
-    context "with params" do
+    context 'with params' do
 
       before do
-        stub_get(path).with(query: {per: "25"}).to_return(body: fixture("category.json"))
+        stub_get(path).with(query: {per: '25'}).to_return(body: fixture('category.json'))
       end
 
       before do
         client.categories(per: 25)
       end
 
-      it "sends the params" do
-        a_get(path).with(query: {per: "25"}).should have_been_made
+      it 'sends the params' do
+        a_get(path).with(query: {per: '25'}).should have_been_made
       end
     end
   end
 
-
-  describe ".public_categories" do
+  describe '.public_categories' do
 
     let(:path) do
-      "/categories/public"
+      '/categories/public'
     end
 
     before do
@@ -86,51 +83,49 @@ describe Lelylan::Client::Categories do
     end
 
     before do
-      stub_get(path).to_return(body: fixture("categories.json"))
+      stub_get(path).to_return(body: fixture('categories.json'))
     end
 
     let!(:categories) do
       client.public_categories
     end
 
-    it "returns a list of categories" do
+    it 'returns a list of categories' do
       categories.should have(1).item
     end
 
-    it "sends the request" do
+    it 'sends the request' do
       a_get('http://api.lelylan.com/categories/public').should have_been_made
     end
   end
 
-
-  describe ".create_category" do
+  describe '.create_category' do
 
     let(:path) do
-      "/categories"
+      '/categories'
     end
 
     before do
-      stub_post(path).with(body: {name: "Dimmer"}).to_return(body: fixture("category.json"))
+      stub_post(path).with(body: {name: 'Dimmer'}).to_return(body: fixture('category.json'))
     end
 
     let!(:category) do
-      client.create_category(name: "Dimmer")
+      client.create_category(name: 'Dimmer')
     end
 
-    it "returns the category" do
+    it 'returns the category' do
       category.uri.should_not be_nil
     end
 
-    it "sends the request" do
-      a_post(path).with(body: {name: "Dimmer"}).should have_been_made
+    it 'sends the request' do
+      a_post(path).with(body: {name: 'Dimmer'}).should have_been_made
     end
   end
 
-
-  describe ".update_category" do
+  describe '.update_category' do
 
     let(:path) do
-      "/categories/4dcb9e23d033a9088900000a"
+      '/categories/4dcb9e23d033a9088900000a'
     end
 
     let(:uri) do
@@ -138,27 +133,26 @@ describe Lelylan::Client::Categories do
     end
 
     before do
-      stub_put(path).with(body: {name: "Dimmer"}).to_return(body: fixture("category.json"))
+      stub_put(path).with(body: {name: 'Dimmer'}).to_return(body: fixture('category.json'))
     end
 
     let!(:category) do
-      client.update_category(uri, name: "Dimmer")
+      client.update_category(uri, name: 'Dimmer')
     end
 
-    it "returns the category" do
+    it 'returns the category' do
       category.uri.should_not be_nil
     end
 
-    it "sends the request" do
-      a_put(path).with(body: {name: "Dimmer"}).should have_been_made
+    it 'sends the request' do
+      a_put(path).with(body: {name: 'Dimmer'}).should have_been_made
     end
   end
 
-
-  describe ".delete_category" do
+  describe '.delete_category' do
 
     let(:path) do
-      "/categories/4dcb9e23d033a9088900000a"
+      '/categories/4dcb9e23d033a9088900000a'
     end
 
     let(:uri) do
@@ -166,18 +160,18 @@ describe Lelylan::Client::Categories do
     end
 
     before do
-      stub_delete(path).to_return(body: fixture("category.json"))
+      stub_delete(path).to_return(body: fixture('category.json'))
     end
 
     let!(:category) do
       client.delete_category(uri)
     end
 
-    it "returns the category" do
+    it 'returns the category' do
       category.uri.should_not be_nil
     end
 
-    it "sends the request" do
+    it 'sends the request' do
       a_delete(path).should have_been_made
     end
   end

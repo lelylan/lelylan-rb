@@ -1,4 +1,4 @@
-require "helper"
+require 'helper'
 
 describe Lelylan::Client::Properties do
 
@@ -7,10 +7,10 @@ describe Lelylan::Client::Properties do
   end
 
 
-  describe ".property" do
+  describe '.property' do
 
     let(:path) do
-      "/properties/4dcb9e23d033a9088900000a"
+      '/properties/4dcb9e23d033a9088900000a'
     end
 
     let(:uri) do
@@ -18,66 +18,66 @@ describe Lelylan::Client::Properties do
     end
 
     before do
-      stub_get(path).to_return(body: fixture("property.json"))
+      stub_get(path).to_return(body: fixture('property.json'))
     end
 
     let!(:property) do
       client.property(uri)
     end
 
-    it "returns the property" do
+    it 'returns the property' do
       property.uri.should_not be_nil
     end
 
-    it "sends the request" do
+    it 'sends the request' do
       a_get(path).should have_been_made
     end
   end
 
 
-  describe ".properties" do
+  describe '.properties' do
 
     let(:path) do
-      "/properties"
+      '/properties'
     end
 
     before do
-      stub_get("/properties").to_return(body: fixture("properties.json"))
+      stub_get('/properties').to_return(body: fixture('properties.json'))
     end
 
     let!(:properties) do
       client.properties
     end
 
-    it "returns a list of properties" do
+    it 'returns a list of properties' do
       properties.should have(1).item
     end
 
-    it "sends the request" do
+    it 'sends the request' do
       a_get(path).should have_been_made
     end
 
-    context "with params" do
+    context 'with params' do
 
       before do
-        stub_get(path).with(query: {per: "25"}).to_return(body: fixture("property.json"))
+        stub_get(path).with(query: {per: '25'}).to_return(body: fixture('property.json'))
       end
 
       before do
         client.properties(per: 25)
       end
 
-      it "sends the params" do
-        a_get(path).with(query: {per: "25"}).should have_been_made
+      it 'sends the params' do
+        a_get(path).with(query: {per: '25'}).should have_been_made
       end
     end
   end
 
 
-  describe ".public_properties" do
+  describe '.public_properties' do
 
     let(:path) do
-      "/properties/public"
+      '/properties/public'
     end
 
     before do
@@ -86,51 +86,51 @@ describe Lelylan::Client::Properties do
     end
 
     before do
-      stub_get(path).to_return(body: fixture("properties.json"))
+      stub_get(path).to_return(body: fixture('properties.json'))
     end
 
     let!(:properties) do
       client.public_properties
     end
 
-    it "returns a list of properties" do
+    it 'returns a list of properties' do
       properties.should have(1).item
     end
 
-    it "sends the request" do
+    it 'sends the request' do
       a_get('http://api.lelylan.com/properties/public').should have_been_made
     end
   end
 
 
-  describe ".create_property" do
+  describe '.create_property' do
 
     let(:path) do
-      "/properties"
+      '/properties'
     end
 
     before do
-      stub_post(path).with(body: {name: "Status"}).to_return(body: fixture("property.json"))
+      stub_post(path).with(body: {name: 'Status'}).to_return(body: fixture('property.json'))
     end
 
     let!(:property) do
-      client.create_property(name: "Status")
+      client.create_property(name: 'Status')
     end
 
-    it "returns the property" do
+    it 'returns the property' do
       property.uri.should_not be_nil
     end
 
-    it "sends the request" do
-      a_post(path).with(body: {name: "Status"}).should have_been_made
+    it 'sends the request' do
+      a_post(path).with(body: {name: 'Status'}).should have_been_made
     end
   end
 
 
-  describe ".update_property" do
+  describe '.update_property' do
 
     let(:path) do
-      "/properties/4dcb9e23d033a9088900000a"
+      '/properties/4dcb9e23d033a9088900000a'
     end
 
     let(:uri) do
@@ -138,27 +138,27 @@ describe Lelylan::Client::Properties do
     end
 
     before do
-      stub_put(path).with(body: {name: "Status"}).to_return(body: fixture("property.json"))
+      stub_put(path).with(body: {name: 'Status'}).to_return(body: fixture('property.json'))
     end
 
     let!(:property) do
-      client.update_property(uri, name: "Status")
+      client.update_property(uri, name: 'Status')
     end
 
-    it "returns the property" do
+    it 'returns the property' do
       property.uri.should_not be_nil
     end
 
-    it "sends the request" do
-      a_put(path).with(body: {name: "Status"}).should have_been_made
+    it 'sends the request' do
+      a_put(path).with(body: {name: 'Status'}).should have_been_made
     end
   end
 
 
-  describe ".delete_property" do
+  describe '.delete_property' do
 
     let(:path) do
-      "/properties/4dcb9e23d033a9088900000a"
+      '/properties/4dcb9e23d033a9088900000a'
     end
 
     let(:uri) do
@@ -166,18 +166,18 @@ describe Lelylan::Client::Properties do
     end
 
     before do
-      stub_delete(path).to_return(body: fixture("property.json"))
+      stub_delete(path).to_return(body: fixture('property.json'))
     end
 
     let!(:property) do
       client.delete_property(uri)
     end
 
-    it "returns the property" do
+    it 'returns the property' do
       property.uri.should_not be_nil
     end
 
-    it "sends the request" do
+    it 'sends the request' do
       a_delete(path).should have_been_made
     end
   end

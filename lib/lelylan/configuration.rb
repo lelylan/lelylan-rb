@@ -12,7 +12,7 @@ module Lelylan
       :user,
       :password,
       :proxy,
-      :oauth_token,
+      :token,
       :user_agent,
       :auto_traversal,
       :per_page].freeze
@@ -57,7 +57,7 @@ module Lelylan
       self.user           = nil
       self.password       = nil
       self.proxy          = nil
-      self.oauth_token    = nil
+      self.token          = nil
       self.user_agent     = DEFAULT_USER_AGENT
       self.auto_traversal = DEFAULT_AUTO_TRAVERSAL
     end

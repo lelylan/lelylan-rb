@@ -1,6 +1,7 @@
 require 'lelylan/configuration'
 require 'lelylan/client'
 require 'lelylan/error'
+require 'oauth2'
 
 module Lelylan
   extend Configuration

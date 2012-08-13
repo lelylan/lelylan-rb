@@ -7,10 +7,6 @@ require 'lelylan'
 require 'rspec'
 require 'webmock/rspec'
 
-def a_client
-  Lelylan::Client.new(user: 'foo', password: 'bar')
-end
-
 def a_delete(url)
   a_request(:delete, lelylan_url(url))
 end
@@ -60,13 +56,16 @@ def fixture(file)
 end
 
 def lelylan_url(url)
-  if url =~ /^http/
-    url
-  elsif client && client.authenticated?
-    "http://#{client.user}:#{client.password}@api.lelylan.com#{url}"
-  elsif client && client.oauthed?
-    "http://api.lelylan.com#{url}?access_token=#{client.oauth_token}"
-  else
-    "http://api.lelylan.com#{url}"
-  end
+  url =~ /^http/ ? url : "http://api.lelylan.com#{url}"
+end
+
+def a_client
+  client_id     = '36963b6bd9dc1127553b57f55ea54d4cecf97e386bcecc5f9198e8dd0ed235f9'
+  client_secret = '8e6343a084320b6b11cdd3349642718c11af1af9b9f64ed4976018bdf20d0082'
+  site_uri      = 'http://app.dev'
+  application   = OAuth2::Client.new client_id, client_secret, site: site_uri
+  json_token    = MultiJson.load fixture('oauth2/token.json').read
+  token         = OAuth2::AccessToken.from_hash application, json_token
+
+  Lelylan::Client.new token: token
 end
