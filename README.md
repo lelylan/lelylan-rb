@@ -35,7 +35,7 @@ Require gems.
 
 ### Create the access token
 
-Create a client.
+Create a client (uses the [OAuth2 gem](https://github.com/intridea/oauth2/)).
 
     oauth = OAuth2::Client.new(client_id, client_secret, site: site)
 
@@ -46,9 +46,9 @@ Redirect the application to the Lelylan authorization page.
 Create the access token. The params[:code] contains the authorization
 code created from Lelylan and sent to the redirect_uri.
 
-    token = client.auth_code.get_token(params[:code], redirect_uri: redirect_uri)
+    token = oauth.auth_code.get_token(params[:code], redirect_uri: redirect_uri)
 
-### Create the client.
+### Create the Lelylan client.
 
     client = Lelylan::Client.new(token: token)
 
@@ -96,7 +96,7 @@ Lelylan support four OAuth2 authorization flows.
 
     oauth = OAuth2::Client.new(client_id, client_secret, site: site)
     redirect oauth.auth_code.authorize_url(redirect_uri: redirect_uri)
-    token = client.auth_code.get_token(params[:code], redirect_uri: redirect_uri)
+    token = oauth.auth_code.get_token(params[:code], redirect_uri: redirect_uri)
 
 ### Implicit grant flow
 
@@ -111,7 +111,7 @@ Lelylan support four OAuth2 authorization flows.
 
 ### Client credentials flow
 
-    token = client.client_credentials.get_token
+    token = oauth.client_credentials.get_token
 
 All access tokens, when expired, are automatically refreshed.
 
