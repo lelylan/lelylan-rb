@@ -1,47 +1,58 @@
 # Lelylan Ruby Gem
 
-Ruby wrapper for [Lelylan REST APIs](http://dev.lelylan.com)
+Ruby wrapper for [Lelylan API](http://dev.lelylan.com)
+
+
+## Requirements
+
+People API is tested against MRI 1.9.3.
 
 
 ## Installation
 
-    gem install lelylan-rb
+Install gem using Bundler.
 
-Or if you are using bundler 
+    gem 'lelylan-rb', require: 'lelylan'
 
-    gem "lelylan-rb", require: 'lelylan'
+Development version.
+
+    gem 'lelylan-rb', require: 'lelylan', git: 'https://github.com/lelylan/lelylan-rb', branch: 'dev'
 
 
 ## Resources
 
-[Ruby gem documentation](http://rdoc.info/gems/lelylan-rb)
+* [Ruby gem documentation](http://rdoc.info/gems/lelylan-rb)
+* [Lelylan API](http://dev.lelylan.com)
 
-[Lelylan REST APIs](http://dev.lelylan.com)
+
+## Getting started
+
+Require gems.
+
+    require 'rubygems'
+    require 'lelylan-rb'
 
 
-## Client setup
+### Create the access token
 
-For methods that require authentication, you'll need to setup a client with your login and password
+Create a client.
 
-    require "rubygems"
-    require "lelylan-rb"
+    oauth = OAuth2::Client.new(client_id, client_secret, site: site)
 
-    @client = Lelylan::Client.new(user: "USERNAME", password: "PASSWORD")
+Redirect the application to the Lelylan authorization page.
 
-To use with Lelylan Enterprise (work in progress) you'll need to set the API endpoints before instantiating a client.
+    redirect oauth.auth_code.authorize_url(redirect_uri: redirect_uri)
 
-    Lelylan.configure do |config|
-      config.endpoint = "https://lelylan.yourhouse.com"
-    end
+Create the access token. The params[:code] contains the authorization
+code created from Lelylan and sent to the redirect_uri.
 
-    @client = Lelylan::Client.new(user: "USERNAME", password: "PASSWORD")
+    token = client.auth_code.get_token(params[:code], redirect_uri: redirect_uri)
 
-Another way to reach the same result is accessing directly to the client object.
+### Create the client.
 
-    @client = Lelylan::Client.new(user: "USERNAME", password: "PASSWORD")
-    @client.endpoint = "https://lelylan.yourhouse.com"
+    client = Lelylan::Client.new(token: token)
 
-## Examples
+### Access Lelylan API
 
 Get 10 devices.
 
@@ -49,20 +60,19 @@ Get 10 devices.
 
 Get a device based on its URI.
 
-    client.device("http://api.lelylan.com/devices/:id")
+    client.device('http://api.lelylan.com/devices/:id')
 
 Search a device type based on its name.
 
-    client.types(name: "Dimmer").first
+    client.types(name: 'Dimmer').first
 
 Create a device (in this case we suppose the type is a dimmer)
 
-    device = client.create_device(name: "Closet dimmer", type_uri: dimmer.uri)
+    device = client.create_device(name: 'Closet dimmer', type_uri: dimmer.uri)
 
 Execute a function.
 
     client.execute(device.uri, function.uri)
-
 
 ## More examples
 
@@ -78,7 +88,47 @@ For more examples check out the [ruby gem documentation](http://rdoc.info/gems/l
 * [Categories examples](docs/Lelylan/Client/Categories)
 * [Locations examples](docs/Lelylan/Client/Locations)
 
+## Authorization flows
 
+Lelylan support four OAuth2 authorization flows.
+
+### Authorization code flows
+
+    oauth = OAuth2::Client.new(client_id, client_secret, site: site)
+    redirect oauth.auth_code.authorize_url(redirect_uri: redirect_uri)
+    token = client.auth_code.get_token(params[:code], redirect_uri: redirect_uri)
+
+### Implicit grant flow
+
+    oauth = OAuth2::Client.new(client_id, client_secret, site: site)
+    redirect oauth.auth_code.authorize_url(redirect_uri: redirect_uri)
+    token = OAuth2::AccessToken.from_kvform(client, params)
+
+### Resource owner password credentials flow
+
+    oauth = OAuth2::Client.new(client_id, client_secret, site: site)
+    token = oauth.password.get_token('email', 'password')
+
+### Client credentials flow
+
+    token = client.client_credentials.get_token
+
+All access tokens, when expired, are automatically refreshed.
+
+
+## Settings
+
+### API endpoint
+
+Configuration block.
+
+    Lelylan.configure { |c| c.endpoint = 'https://lelylan.yourhouse.com' }
+    @client = Lelylan::Client.new(token: token)
+
+Client instance.
+
+    @client = Lelylan::Client.new(token: token)
+    @client.endpoint = 'https://lelylan.yourhouse.com'
 
 
 ## Errors
@@ -107,14 +157,11 @@ Learn more about the [error response structure](http://dev.lelylan.com/rest/core
 
 ## Contributing
 
-Fork the repo on github and issue a pull request with your changes. No other means of supplying 
-code to the team will be accepted. Provide specs with your pull request if the existing specs 
-do not cover the change. Pull requests that provide new functionality without specs will not 
-be pulled in under any circumstance.
+Fork the repo on github and send a pull requests with topic branches. Do not forget to 
+provide specs to your contribution.
+
 
 ### Running specs
-
-Getting set up should require minimal effort
 
 * Fork and clone the repository.
 * Run `gem install bundler` to get the latest for the gemset.
@@ -124,26 +171,18 @@ Getting set up should require minimal effort
 
 ## Spec guidelines
 
-The following [doc](https://docs.google.com/document/d/1gi00-wwPaLk5VvoAJhBVNh9Htw4Rwmj-Ut88T4M2MwI/edit?hl=en#) demonstrates the desired way to write a spec in this project. To maintain the spec 
-consistent, follow these rules.
-
-* Use describe blocks for method names.
-* Use context blocks for conditions.
-* 1 assertion per example block.
-* When describing methods, prefix with '#' for instance methods, '.' for class methods.
+Follow [rspec best practices](https://docs.google.com/document/d/1gi00-wwPaLk5VvoAJhBVNh9Htw4Rwmj-Ut88T4M2MwI/edit?hl=en#) guidelines.
 
 
 ## Coding guidelines
 
-* Keep method line counts small and easy to read.
-* Do not fear the use of Ruby's tap.
-* Provide API documentation in the form of YARD.
+Follow [github](https://github.com/styleguide/) guidelines.
 
 
 ## Feedback
 
-Use the [issue tracker](http://github.com/lelylan/lelylan-rb/issues) for any bug you find and write us a [mail](mailto:touch@lelylan.com)
-for any feature idea that can improve the project. Feedback is always welcome. Always.
+Use the [issue tracker](http://github.com/lelylan/lelylan-rb/issues) for bugs.
+[Mail](mailto:touch@lelylan.com) or [Tweet](http://twitter.com/lelylan) us for any idea that can improve the project.
 
 
 ## Links 
@@ -165,9 +204,9 @@ Special thanks to the following people for submitting patches.
 
 ## Changelog
 
-See CHANGELOG
+See [CHANGELOG](people/blob/master/CHANGELOG.md)
 
 
 ## Copyright
 
-Copyright (c) 2013 [Lelylan](http://lelylan.com). See LICENSE for details.
+Copyright (c) 2013 [Lelylan](http://lelylan.com). See [LICENSE](people/blob/master/LICENSE.md) for details.
