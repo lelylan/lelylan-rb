@@ -1,11 +1,11 @@
 # Lelylan Ruby Gem
 
-Ruby wrapper for [Lelylan API](http://dev.lelylan.com)
+Ruby client library for [Lelylan API](http://dev.lelylan.com)
 
 
 ## Requirements
 
-People API is tested against MRI 1.9.3.
+Ruby client library is tested against MRI 1.9.3.
 
 
 ## Installation
