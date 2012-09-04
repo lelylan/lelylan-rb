@@ -8,19 +8,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'faraday_middleware', '~> 0.8'
   gem.add_dependency 'hashie', '~> 1.2'
   gem.add_dependency 'multi_json', '~> 1.3'
-  gem.add_development_dependency 'json'
-  gem.add_development_dependency 'maruku'
-  gem.add_development_dependency 'rake'
-  gem.add_development_dependency 'rspec'
-  gem.add_development_dependency 'simplecov'
-  gem.add_development_dependency 'webmock'
-  gem.add_development_dependency 'guard-rspec'
-  gem.add_development_dependency 'fuubar'
-  gem.add_development_dependency 'growl'
-  gem.add_development_dependency 'yard'
-  gem.add_development_dependency 'yard-tomdoc'
-  gem.add_development_dependency 'redcarpet'
-  gem.add_development_dependency 'github-markup'
   gem.authors = ["Andrea Reginato"]
   gem.description = %q{Ruby wrapper for Lelylan API}
   gem.email = ['touch@lelylan.com']
