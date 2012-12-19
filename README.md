@@ -21,7 +21,7 @@ Development version.
 
 ## Resources
 
-* [Ruby gem documentation](http://rdoc.info/gems/lelylan-rb)
+* [Ruby gem documentation](http://rubydoc.info/github/lelylan/lelylan-rb)
 * [Lelylan API](http://dev.lelylan.com)
 
 
@@ -82,17 +82,17 @@ with a token is not needed.
 
 ## More examples
 
-For more examples check out the [ruby gem documentation](http://rdoc.info/gems/lelylan-rb).
+For more examples check out the [ruby gem documentation](http://rubydoc.info/github/lelylan/lelylan-rb).
 
-* [Device examples](docs/Lelylan/Client/Devices)
-* [Consumption examples](docs/Lelylan/Client/Consumptions)
-* [Hisotry examples](docs/Lelylan/Client/Histories)
-* [Types examples](docs/Lelylan/Client/Types)
-* [Properties examples](docs/Lelylan/Client/Properties)
-* [Functions examples](docs/Lelylan/Client/Functions)
-* [Statuses examples](docs/Lelylan/Client/Statuses)
-* [Categories examples](docs/Lelylan/Client/Categories)
-* [Locations examples](docs/Lelylan/Client/Locations)
+* [Device examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Devices)
+* [Consumption examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Consumptions)
+* [Hisotry examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Histories)
+* [Types examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Types)
+* [Properties examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Properties)
+* [Functions examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Functions)
+* [Statuses examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Statuses)
+* [Categories examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Categories)
+* [Locations examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Locations)
 
 ## Authorization flows
 
@@ -158,7 +158,7 @@ Through the error message attribute you can access the error information.
       puts "The resource #{e.message.error.uri} was not found"
     end
 
-Learn more about the [error response structure](http://dev.lelylan.com/rest/core/#errors).
+Learn more about the [error response structure](http://dev.lelylan.com/rest/core#errors).
 
 
 ## Contributing
@@ -177,7 +177,7 @@ provide specs to your contribution.
 
 ## Spec guidelines
 
-Follow [rspec best practices](https://docs.google.com/document/d/1gi00-wwPaLk5VvoAJhBVNh9Htw4Rwmj-Ut88T4M2MwI/edit?hl=en#) guidelines.
+Follow [rspec best practices](http://betterspecs.org) guidelines.
 
 
 ## Coding guidelines
@@ -210,9 +210,9 @@ Special thanks to the following people for submitting patches.
 
 ## Changelog
 
-See [CHANGELOG](people/blob/master/CHANGELOG.md)
+See [CHANGELOG](lelylan-rb/blob/master/CHANGELOG.md)
 
 
 ## Copyright
 
-Copyright (c) 2013 [Lelylan](http://lelylan.com). See [LICENSE](people/blob/master/LICENSE.md) for details.
+Copyright (c) 2013 [Lelylan](http://lelylan.com). See [LICENSE](lelylan-rb/blob/master/LICENSE.md) for details.
