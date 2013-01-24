@@ -113,22 +113,7 @@ The Device API defines a set of services to monitor and control every existing d
 Its final goal is to map every device to a unique URI which provides control over it.
 [See examples](http://dev.lelylan.com/api/devices#language=node).
 
-<<<<<<< HEAD
-
-### History
-=======
-For more examples check out the [ruby gem documentation](http://rubydoc.info/github/lelylan/lelylan-rb).
-
-* [Device examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Devices)
-* [Consumption examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Consumptions)
-* [Hisotry examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Histories)
-* [Types examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Types)
-* [Properties examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Properties)
-* [Functions examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Functions)
-* [Statuses examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Statuses)
-* [Categories examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Categories)
-* [Locations examples](http://rubydoc.info/github/lelylan/lelylan-rb/Lelylan/Client/Locations)
->>>>>>> 5ac446798d027094cce522df0928ee5d615b5535
+### Histories
 
 When a device updates its properties or executes a function a new history resource with
 a snapshot of all device properties is created by Lelylan, also the ones that has not been
@@ -235,15 +220,7 @@ Client instance.
 @client.endpoint = 'https://lelylan.yourhouse.com'
 ```
 
-
-
-
-
-
-<<<<<<< HEAD
-=======
 Learn more about the [error response structure](http://dev.lelylan.com/rest/core#errors).
->>>>>>> 5ac446798d027094cce522df0928ee5d615b5535
 
 
 ## Contributing
@@ -296,18 +273,10 @@ Special thanks to the following people for submitting patches.
 
 ## Changelog
 
-<<<<<<< HEAD
 See [CHANGELOG](https://github.com/lelylan/lelylan-rb/blob/master/CHANGELOG.md)
-=======
-See [CHANGELOG](lelylan-rb/blob/master/CHANGELOG.md)
->>>>>>> 5ac446798d027094cce522df0928ee5d615b5535
 
 
 ## Copyright
 
-<<<<<<< HEAD
 Copyright (c) 2013 [Lelylan](http://lelylan.com).
 See [LICENSE](https://github.com/lelylan/lelylan-rb/blob/master/LICENSE.md) for details.
-=======
-Copyright (c) 2013 [Lelylan](http://lelylan.com). See [LICENSE](lelylan-rb/blob/master/LICENSE.md) for details.
->>>>>>> 5ac446798d027094cce522df0928ee5d615b5535
