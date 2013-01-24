@@ -1,6 +1,7 @@
 *.gem
 *.rbc
 *.swp
+*.swo
 *.tmproj
 *.DS_Store
 *~
