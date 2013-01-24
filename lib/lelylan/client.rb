@@ -9,7 +9,6 @@ require 'lelylan/client/types'
 require 'lelylan/client/properties'
 require 'lelylan/client/functions'
 require 'lelylan/client/statuses'
-require 'lelylan/client/categories'
 require 'lelylan/client/locations'
 
 module Lelylan
@@ -21,11 +20,6 @@ module Lelylan
       Configuration::VALID_OPTIONS_KEYS.each do |key|
         send("#{key}=", options[key])
       end
-    end
-
-    # helper method
-    def find_id(uri)
-      Addressable::URI.parse(uri).basename
     end
 
     # structure related
@@ -41,7 +35,6 @@ module Lelylan
     include Lelylan::Client::Properties
     include Lelylan::Client::Functions
     include Lelylan::Client::Statuses
-    include Lelylan::Client::Categories
     include Lelylan::Client::Locations
   end
 end
