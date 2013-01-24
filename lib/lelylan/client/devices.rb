@@ -5,7 +5,7 @@ module Lelylan
       #
       # Public: Returns extended information for a given device identified from its ID.
       #
-      # device - A String that represent the device ID.
+      # id - A String that represent the device ID.
       #
       # Returns Hashie The device.
       #
@@ -38,7 +38,7 @@ module Lelylan
       #
       # Public: Update a device identified from its ID and returns extended information for it.
       #
-      # device - A String that represent the device ID.
+      # id - A String that represent the device ID.
       # params - The Hash used to update the resource (default: {}).
       #
       # Returns Hashie The updated device.
@@ -82,6 +82,28 @@ module Lelylan
       #
       def device_properties(id, params={})
         put("/devices/#{id}/properties", params)
+      end
+
+      #
+      # Public: Activate a device and returns extended information for it.
+      #
+      # params - A Hash containing the activation code.
+      #
+      # Returns Hashie The activated device.
+      #
+      def activate_device(params = {})
+        post('/activations', params)
+      end
+
+      #
+      # Public: Deactivate a device and returns extended information for it.
+      #
+      # activation_code - A String that represents the activation_code.
+      #
+      # Returns Hashie The activated device.
+      #
+      def deactivate_device(activation_code)
+        delete("/activations/#{activation_code}")
       end
     end
   end

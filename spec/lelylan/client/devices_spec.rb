@@ -8,10 +8,6 @@ describe Lelylan::Client::Devices do
 
   describe '#find_device' do
 
-    let(:id) do
-      '4dcb9e23d033a9088900000a'
-    end
-
     let(:uri) do
       'http://api.lelylan.com/devices/1'
     end
@@ -161,7 +157,7 @@ describe Lelylan::Client::Devices do
   end
 
 
-  describe '.device_properties' do
+  describe '#device_properties' do
 
     let(:properties) do
       [{uri: 'http://api.lelylan.com/properties/4dcb9e23d033a9088900020a', value: '50'}]
@@ -181,6 +177,46 @@ describe Lelylan::Client::Devices do
 
     it 'sends the request' do
       a_put('/devices/1/properties').with(body: { properties: properties }).should have_been_made
+    end
+  end
+
+
+  describe '#activate_device' do
+
+    before do
+      stub_post('/activations').with(body: { activation_code: '1' }).to_return(body: fixture('device.json'))
+    end
+
+    let!(:device) do
+      lelylan.activate_device(activation_code: '1')
+    end
+
+    it 'returns the device' do
+      device.id.should_not be_nil
+    end
+
+    it 'sends the request' do
+      a_post('/activations').with(body: { activation_code: '1' }).should have_been_made
+    end
+  end
+
+
+  describe '#deactivate_device' do
+
+    before do
+      stub_delete('/activations/1').to_return(body: fixture('device.json'))
+    end
+
+    let!(:device) do
+      lelylan.deactivate_device('1')
+    end
+
+    it 'returns the device' do
+      device.id.should_not be_nil
+    end
+
+    it 'sends the request' do
+      a_delete('/activations/1').should have_been_made
     end
   end
 end
