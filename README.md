@@ -20,21 +20,26 @@ Ruby client library is tested against MRI 1.9.3.
 
 Install the client using Bundler.
 
-    gem 'lelylan-rb', require: 'lelylan'
-    gem 'oauth2'
+```ruby
+gem 'lelylan-rb', require: 'lelylan'
+gem 'oauth2'
+```
 
 Development version.
 
-    gem 'lelylan-rb', require: 'lelylan', git: 'https://github.com/lelylan/lelylan-rb', branch: 'master'
-
+```ruby
+gem 'lelylan-rb', require: 'lelylan', git: 'https://github.com/lelylan/lelylan-rb', branch: 'master'
+```
 
 ## Getting started
 
 ### Require Gem
 
-    require 'rubygems'
-    require 'lelylan-rb'
-    require 'oauth2'
+```ruby
+require 'rubygems'
+require 'lelylan-rb'
+require 'oauth2'
+```
 
 ### Get an access token
 
@@ -111,7 +116,7 @@ Access tokens, when expired, are automatically refreshed.
 
 The Device API defines a set of services to monitor and control every existing device.
 Its final goal is to map every device to a unique URI which provides control over it.
-[See examples](http://dev.lelylan.com/api/devices#language=node).
+[See examples](http://dev.lelylan.com/api/devices#language=ruby).
 
 ### Histories
 
@@ -119,27 +124,27 @@ When a device updates its properties or executes a function a new history resour
 a snapshot of all device properties is created by Lelylan, also the ones that has not been
 updated. This makes it easy to recreate previous device status and extract usage patterns
 to improve the way people live their house.
-[See examples](http://dev.lelylan.com/api/devices/histories#language=node).
+[See examples](http://dev.lelylan.com/api/devices/histories#language=ruby).
 
 ### Types
 
 A type describes the structure of a device. In its simplest form every type can be defined
 as the combination of three key elements: properties (what vary during time), functions
 (what a device can do), statuses (what a device is in a specific time of its life).
-[See examples](http://dev.lelylan.com/api/types#language=node).
+[See examples](http://dev.lelylan.com/api/types#language=ruby).
 
 ### Properties
 
 A property is whatever vary in a device during time. It can be the intensity in a dimmer,
 the temperature in a cooling system or the volume in a television.
-[See examples](http://dev.lelylan.com/api/types/properties#language=node).
+[See examples](http://dev.lelylan.com/api/types/properties#language=ruby).
 
 ### Functions
 
 Functions defines the daily interactions you have with the devices in your house, for
 example when you turn on a light, close a door or raise the temperature in a room.
 With functions you can control any device in the same way you do everyday of your life.
-[See examples](http://dev.lelylan.com/api/types/functions#language=node).
+[See examples](http://dev.lelylan.com/api/types/functions#language=ruby).
 
 ### Statuses
 
@@ -147,26 +152,26 @@ Properties are not always enough to describe the status of a device. Think at a 
 shutter for example. It has the property aperture that is 100 when open or 0 when closed.
 But what if the roller shutter is opening? It is nether open or close. To have a complete
 control over the device status in a specific moment of its life is to use the status API.
-[See examples](http://dev.lelylan.com/api/types/statuses#language=node).
+[See examples](http://dev.lelylan.com/api/types/statuses#language=ruby).
 
 ### Locations
 
 Locations are the places we live in and where physical devices are placed. Lelylan identifies
 three types of locations usually organized in a hierarchical structure: houses, floors and
 rooms.
-[See examples](http://dev.lelylan.com/api/locations#language=node).
+[See examples](http://dev.lelylan.com/api/locations#language=ruby).
 
 ### Physical devices
 
 Physical devices are the real objects you physically interact with everyday of your life
 like lights, appliances, alarms and more. To enable the communication between Lelylan and
 physical devices they should provide a simple set of web services.
-[See examples](http://dev.lelylan.com/api/physicals#language=node).
+[See examples](http://dev.lelylan.com/api/physicals#language=ruby).
 
 ### Subscriptions
 
 Get real-time updates by subscribing to a resource and its related event.
-[See examples](http://dev.lelylan.com/api/realtime#language=node).
+[See examples](http://dev.lelylan.com/api/realtime#language=ruby).
 
 ### Authenticated User Profile
 
