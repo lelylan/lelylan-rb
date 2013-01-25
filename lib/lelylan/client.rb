@@ -11,6 +11,7 @@ require 'lelylan/client/function'
 require 'lelylan/client/status'
 require 'lelylan/client/location'
 require 'lelylan/client/subscription'
+require 'lelylan/client/physical'
 
 module Lelylan
   class Client
@@ -38,5 +39,6 @@ module Lelylan
     include Lelylan::Client::Status
     include Lelylan::Client::Location
     include Lelylan::Client::Subscription
+    include Lelylan::Client::Physical
   end
 end
