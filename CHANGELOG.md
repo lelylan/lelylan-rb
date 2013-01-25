@@ -1,5 +1,9 @@
 # Changelog
 
-## v0.1.0 ()
+## v0.0.2 (January 25, 2013)
 
-First version Ruby wrapper for Lelylan API
+* First version Ruby wrapper for Lelylan API
+
+## v0.0.1 (July 25, 2012)
+
+* First version Ruby wrapper for Lelylan API
