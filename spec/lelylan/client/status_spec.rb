@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Lelylan::Client::Statuses do
+describe Lelylan::Client::Status do
 
   let(:lelylan) do
     a_client

@@ -2,14 +2,14 @@ require 'lelylan/authentication'
 require 'lelylan/connection'
 require 'lelylan/request'
 
-require 'lelylan/client/devices'
-require 'lelylan/client/consumptions'
-require 'lelylan/client/histories'
-require 'lelylan/client/types'
-require 'lelylan/client/properties'
-require 'lelylan/client/functions'
-require 'lelylan/client/statuses'
-require 'lelylan/client/locations'
+require 'lelylan/client/profile'
+require 'lelylan/client/device'
+require 'lelylan/client/history'
+require 'lelylan/client/type'
+require 'lelylan/client/property'
+require 'lelylan/client/function'
+require 'lelylan/client/status'
+require 'lelylan/client/location'
 
 module Lelylan
   class Client
@@ -28,13 +28,13 @@ module Lelylan
     include Lelylan::Request
 
     # client related
-    include Lelylan::Client::Devices
-    include Lelylan::Client::Consumptions
-    include Lelylan::Client::Histories
-    include Lelylan::Client::Types
-    include Lelylan::Client::Properties
-    include Lelylan::Client::Functions
-    include Lelylan::Client::Statuses
-    include Lelylan::Client::Locations
+    include Lelylan::Client::Profile
+    include Lelylan::Client::Device
+    include Lelylan::Client::History
+    include Lelylan::Client::Type
+    include Lelylan::Client::Property
+    include Lelylan::Client::Function
+    include Lelylan::Client::Status
+    include Lelylan::Client::Location
   end
 end

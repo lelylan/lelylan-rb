@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Lelylan::Client::Histories do
+describe Lelylan::Client::History do
 
   let(:lelylan) do
     a_client

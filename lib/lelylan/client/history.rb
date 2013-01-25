@@ -1,6 +1,6 @@
 module Lelylan
   class Client
-    module Histories
+    module History
 
       #
       # Public: Returns extended information for a given history identified from its ID.

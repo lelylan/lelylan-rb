@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Lelylan::Client::Devices do
+describe Lelylan::Client::Device do
 
   let(:lelylan) do
     a_client

@@ -1,6 +1,6 @@
 module Lelylan
   class Client
-    module Properties
+    module Property
 
       #
       # Public: Returns extended information for a given property identified from its ID.

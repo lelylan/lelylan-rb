@@ -1,6 +1,6 @@
 require 'helper'
 
-describe Lelylan::Client::Properties do
+describe Lelylan::Client::Property do
 
 
   let(:lelylan) do

@@ -1,6 +1,6 @@
 module Lelylan
   class Client
-    module Functions
+    module Function
 
       #
       # Public: Returns extended information for a given function identified from its ID.

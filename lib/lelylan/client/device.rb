@@ -1,6 +1,6 @@
 module Lelylan
   class Client
-    module Devices
+    module Device
 
       #
       # Public: Returns extended information for a given device identified from its ID.

@@ -1,6 +1,6 @@
 module Lelylan
   class Client
-    module Types
+    module Type
 
       #
       # Public: Returns extended information for a given type identified from its ID.

@@ -1,6 +1,6 @@
 module Lelylan
   class Client
-    module Statuses
+    module Status
 
       #
       # Public: Returns extended information for a given status identified from its ID.
