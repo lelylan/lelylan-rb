@@ -107,7 +107,13 @@ Access tokens, when expired, are automatically refreshed.
 
 ## Realtime services
 
-#### TODO
+When using the [subscription](http://dev.lelylan.com/api/realtime#language=node) services
+you don't need an access token. In this case what you need is to set the client credentials.
+
+```ruby
+lelylan = Lelylan::Client.new(client_id:'<client-id>', client_secret: '<client-secret>')
+subscriptions = lelylan.subscriptions
+```
 
 
 ## Lelylan Services
