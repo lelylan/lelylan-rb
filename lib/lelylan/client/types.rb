@@ -2,107 +2,71 @@ module Lelylan
   class Client
     module Types
 
-      # Public: Returns extended information for a given type identified from its URI.
-      # Find more at {http://dev.lelylan.com/rest/types/core/#get Lelylan Dev Center}.
       #
-      # type - A String that represent the type URI.
+      # Public: Returns extended information for a given type identified from its ID.
+      #
+      # id - A String that represent the type ID.
       #
       # Returns Hashie The type.
       #
-      # Examples
-      #
-      #   type = "http://api.lelylan.com/types/4dcb9e23d033a9088902200a"
-      #   client.type(type)
-      #
-      def type(type)
-        get("/types/#{find_id(type)}")
+      def type(id)
+        get("/types/#{id}")
       end
 
+      #
       # Public: Returns a list of owned types.
-      # Find more at {http://dev.lelylan.com/rest/types/core/#all Lelylan Dev Center}.
       #
-      # options - The Hash option used to refine the search (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/devices/types/#all API doc} for the accepted options.
-      # 
-      # Returns Hashie List of types.
+      # params - The Hash used to refine the search (default: {}).
       #
-      # Examples
-      # 
-      #   # Retrurns the first 10 types
-      #   client.types(per: 10)
+      # Returns Array List of types.
       #
-      #   # Returns the types where the name match with the desired string
-      #   client.types(name: 'dimmer')
-      #
-      def types(options = {})
-        get("/types", options)
+      def types(params = {})
+        get('/types', params)
       end
 
-      # Public: Returns a list of all public types.
-      # Find more at {http://dev.lelylan.com/rest/types/core/#all Lelylan Dev Center}.
       #
-      # options - The Hash option used to refine the search (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/devices/types/#all API doc} for the accepted options.
-      # 
-      # Returns Hashie List of types.
+      # Public: Returns a list of all existing types.
       #
-      # Examples
-      # 
-      #   # Retrurns the first 10 public types
-      #   client.public_types(per: 10)
+      # params - The Hash used to refine the search (default: {}).
       #
-      def public_types(options = {})
-        get("/types/public", options)
+      # Returns Array List of types.
+      #
+      def public_types(params = {})
+        get('/types/public', params)
       end
 
+      #
       # Public: Create a type and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/core/#create Lelylan Dev Center}.
       #
-      # options - The Hash option used to create the resource (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/types/core/#create API doc} for the accepted options.
-      # 
+      # params - The Hash used to create the resource (default: {}).
+      #
       # Returns Hashie The created type.
       #
-      # Examples
-      # 
-      #   client.create_type(name: 'Dimmer')
-      #
-      def create_type(options = {})
-        post("/types", options)
+      def create_type(params = {})
+        post('/types', params)
       end
 
-      # Public: Update a type identified from its URI and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/core/#update Lelylan Dev Center}.
       #
-      # type - A String that represents the type URI.
-      # options - The Hash option used to update the resource (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/types/core/#update API doc} for the accepted options.
-      # 
+      # Public: Update a type identified from its ID and returns extended information for it.
+      #
+      # id - A String that represent the type ID.
+      # params - The Hash used to update the resource (default: {}).
+      #
       # Returns Hashie The updated type.
       #
-      # Examples
-      # 
-      #   type = "http://api.lelylan.com/types/4dcb9e23d033a9088902200a"
-      #   client.update_type(type, name: 'RGB Dimmer')
-      #
-      def update_type(type, options = {})
-        put("/types/#{find_id(type)}", options)
+      def update_type(id, params = {})
+        put("/types/#{id}", params)
       end
 
-      # Public: Delete a type identified from its URI and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/core/#delete Lelylan Dev Center}.
       #
-      # type - A String that represent the type URI.
-      # 
+      # Public: Delete a type identified from its ID and returns extended information for it.
+      #
+      # id - A String that represent the type ID.
+      #
       # Returns Hashie The deleted type.
       #
-      # Examples
-      # 
-      #   type = "http://api.lelylan.com/types/4dcb9e23d033a9088902200a"
-      #   client.delete_type(type)
-      #
-      def delete_type(type)
-        delete("/types/#{find_id(type)}")
+      def delete_type(id)
+        delete("/types/#{id}")
       end
     end
   end

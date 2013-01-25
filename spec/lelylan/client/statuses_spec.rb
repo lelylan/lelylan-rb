@@ -2,51 +2,38 @@ require 'helper'
 
 describe Lelylan::Client::Statuses do
 
-  let(:client) do
+  let(:lelylan) do
     a_client
   end
 
-
-  describe '.status' do
-
-    let(:path) do
-      '/statuses/4dcb9e23d033a9088900000a'
-    end
-
-    let(:uri) do
-      "http://api.lelylan.com/#{path}"
-    end
+  describe '#status' do
 
     before do
-      stub_get(path).to_return(body: fixture('status.json'))
+      stub_get('/statuses/1').to_return(body: fixture('status.json'))
     end
 
     let!(:status) do
-      client.status(uri)
+      lelylan.status('1')
     end
 
     it 'returns the status' do
-      status.uri.should_not be_nil
+      status.id.should_not be_nil
     end
 
     it 'sends the request' do
-      a_get(path).should have_been_made
+      a_get('/statuses/1').should have_been_made
     end
   end
 
 
-  describe '.statuses' do
-
-    let(:path) do
-      '/statuses'
-    end
+  describe '#statuses' do
 
     before do
       stub_get('/statuses').to_return(body: fixture('statuses.json'))
     end
 
     let!(:statuses) do
-      client.statuses
+      lelylan.statuses
     end
 
     it 'returns a list of statuses' do
@@ -54,43 +41,35 @@ describe Lelylan::Client::Statuses do
     end
 
     it 'sends the request' do
-      a_get(path).should have_been_made
+      a_get('/statuses').should have_been_made
     end
 
     context 'with params' do
 
       before do
-        stub_get(path).with(query: {per: '25'}).to_return(body: fixture('status.json'))
+        stub_get('/statuses').with(query: { per: '25' }).to_return(body: fixture('status.json'))
       end
 
       before do
-        client.statuses(per: 25)
+        lelylan.statuses(per: 25)
       end
 
       it 'sends the params' do
-        a_get(path).with(query: {per: '25'}).should have_been_made
+        a_get('/statuses').with(query: { per: '25' }).should have_been_made
       end
     end
   end
 
 
-  describe '.public_statuses' do
 
-    let(:path) do
-      '/statuses/public'
-    end
+  describe '#public_statuses' do
 
     before do
-      client.user     = nil
-      client.password = nil
-    end
-
-    before do
-      stub_get(path).to_return(body: fixture('statuses.json'))
+      stub_get('/statuses/public').to_return(body: fixture('statuses.json'))
     end
 
     let!(:statuses) do
-      client.public_statuses
+      lelylan.public_statuses
     end
 
     it 'returns a list of statuses' do
@@ -98,87 +77,82 @@ describe Lelylan::Client::Statuses do
     end
 
     it 'sends the request' do
-      a_get('http://api.lelylan.com/statuses/public').should have_been_made
+      a_get('/statuses/public').should have_been_made
+    end
+
+    context 'with params' do
+
+      before do
+        stub_get('/statuses/public').with(query: { per: '25' }).to_return(body: fixture('status.json'))
+      end
+
+      before do
+        lelylan.public_statuses(per: 25)
+      end
+
+      it 'sends the params' do
+        a_get('/statuses/public').with(query: { per: '25' }).should have_been_made
+      end
     end
   end
 
 
-  describe '.create_status' do
-
-    let(:path) do
-      '/statuses'
-    end
+  describe '#create_status' do
 
     before do
-      stub_post(path).with(body: {name: 'Setting intensity'}).to_return(body: fixture('status.json'))
+      stub_post('/statuses').with(body: { name: 'Setting Intensity' }).to_return(body: fixture('status.json'))
     end
 
     let!(:status) do
-      client.create_status(name: 'Setting intensity')
+      lelylan.create_status(name: 'Setting Intensity')
     end
 
     it 'returns the status' do
-      status.uri.should_not be_nil
+      status.id.should_not be_nil
     end
 
     it 'sends the request' do
-      a_post(path).with(body: {name: 'Setting intensity'}).should have_been_made
+      a_post('/statuses').with(body: { name: 'Setting Intensity' }).should have_been_made
     end
   end
 
 
-  describe '.update_status' do
-
-    let(:path) do
-      '/statuses/4dcb9e23d033a9088900000a'
-    end
-
-    let(:uri) do
-      "http://api.lelylan.com/#{path}"
-    end
+  describe '#update_status' do
 
     before do
-      stub_put(path).with(body: {name: 'Setting intensity'}).to_return(body: fixture('status.json'))
+      stub_put('/statuses/1').with(body: { name: 'Setting Intensity' }).to_return(body: fixture('status.json'))
     end
 
     let!(:status) do
-      client.update_status(uri, name: 'Setting intensity')
+      lelylan.update_status('1', name: 'Setting Intensity')
     end
 
     it 'returns the status' do
-      status.uri.should_not be_nil
+      status.id.should_not be_nil
     end
 
     it 'sends the request' do
-      a_put(path).with(body: {name: 'Setting intensity'}).should have_been_made
+      a_put('/statuses/1').with(body: { name: 'Setting Intensity' }).should have_been_made
     end
   end
 
 
-  describe '.delete_status' do
-
-    let(:path) do
-      '/statuses/4dcb9e23d033a9088900000a'
-    end
-
-    let(:uri) do
-      "http://api.lelylan.com/#{path}"
-    end
+  describe '#delete_status' do
 
     before do
-      stub_delete(path).to_return(body: fixture('status.json'))
+      stub_delete('/statuses/1').to_return(body: fixture('status.json'))
     end
 
     let!(:status) do
-      client.delete_status(uri)
+      lelylan.delete_status('1')
     end
 
     it 'returns the status' do
-      status.uri.should_not be_nil
+      status.id.should_not be_nil
     end
 
     it 'sends the request' do
-      a_delete(path).should have_been_made
+      a_delete('/statuses/1').should have_been_made
     end
   end
 end

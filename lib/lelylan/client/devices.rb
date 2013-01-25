@@ -9,8 +9,19 @@ module Lelylan
       #
       # Returns Hashie The device.
       #
-      def find_device(id)
+      def device(id)
         get("/devices/#{id}")
+      end
+
+      #
+      # Public: Returns extended information for a given device identified from its ID.
+      #
+      # id - A String that represent the device ID.
+      #
+      # Returns Hashie The device.
+      #
+      def device_privates(id)
+        get("/devices/#{id}/privates")
       end
 
       #
@@ -20,7 +31,7 @@ module Lelylan
       #
       # Returns Array List of devices.
       #
-      def all_devices(params = {})
+      def devices(params = {})
         get('/devices', params)
       end
 

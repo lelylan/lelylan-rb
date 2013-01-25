@@ -2,117 +2,72 @@ module Lelylan
   class Client
     module Functions
 
-      # Public: Returns extended information for a given function identified from its URI.
-      # Find more at {http://dev.lelylan.com/rest/types/functions/#get Lelylan Dev Center}.
       #
-      # function - A String that represent the function URI.
+      # Public: Returns extended information for a given function identified from its ID.
+      #
+      # id - A String that represent the function ID.
       #
       # Returns Hashie The function.
       #
-      # Examples
-      #
-      #   function = "http://api.lelylan.com/functions/4dcb9e23d033a9088902200a"
-      #   client.function(function)
-      #
-      def function(function)
-        get("/functions/#{find_id(function)}")
+      def function(id)
+        get("/functions/#{id}")
       end
 
-      # Public: Returns a list of functions.
-      # Find more at {http://dev.lelylan.com/rest/types/functions/#all Lelylan Dev Center}.
       #
-      # options - The Hash option used to refine the search (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/types/functions/#all API doc} for the accepted options.
-      # 
-      # Returns Hashie List of functions.
+      # Public: Returns a list of owned functions.
       #
-      # Examples
-      # 
-      #   # Retrurns the first 10 functions
-      #   client.functions(per: 10)
+      # params - The Hash used to refine the search (default: {}).
       #
-      #   # Returns the functions where the name match with the desired string
-      #   client.functions(name: 'Turn on')
+      # Returns Array List of functions.
       #
-      def functions(options = {})
-        get("/functions", options)
+      def functions(params = {})
+        get('/functions', params)
       end
 
-      # Public: Returns a list of all public functions.
-      # Find more at {http://dev.lelylan.com/rest/functions/core/#all Lelylan Dev Center}.
       #
-      # options - The Hash option used to refine the search (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/devices/functions/#all API doc} for the accepted options.
-      # 
-      # Returns Hashie List of functions.
+      # Public: Returns a list of all existing functions.
       #
-      # Examples
-      # 
-      #   # Retrurns the first 10 public functions
-      #   client.public_functions(per: 10)
+      # params - The Hash used to refine the search (default: {}).
       #
-      def public_functions(options = {})
-        get("/functions/public", options)
+      # Returns Array List of functions.
+      #
+      def public_functions(params = {})
+        get('/functions/public', params)
       end
 
+      #
       # Public: Create a function and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/functions/#create Lelylan Dev Center}.
       #
-      # options - The Hash option used to create the resource (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/types/functions/#create API doc} for the accepted options.
-      # 
+      # params - The Hash used to create the resource (default: {}).
+      #
       # Returns Hashie The created function.
       #
-      # Examples
-      # 
-      #   # device properties
-      #   status    = https://api.lelylan.com/properties/4dcb9e23d033a9088902200b"
-      #   intensity = https://api.lelylan.com/properties/4dcb9e23d033a9088902200c"
-      #   # values the function is going to set
-      #   properties = [{uri: status, value: 'on'}, {uri: intensity}]
-      #   # create the function
-      #   client.create_function(name: 'Set intensity', properties: properties)
-      #
-      def create_function(options = {})
-        post("/functions", options)
+      def create_function(params = {})
+        post('/functions', params)
       end
 
-      # Public: Update a function identified from its URI and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/functions/#update Lelylan Dev Center}.
       #
-      # function - A String that represents the function URI.
-      # options - The Hash option used to update the resource (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/types/functions/#update API doc} for the accepted options.
-      # 
+      # Public: Update a function identified from its ID and returns extended information for it.
+      #
+      # id - A String that represent the function ID.
+      # params - The Hash used to update the resource (default: {}).
+      #
       # Returns Hashie The updated function.
       #
-      # Examples
-      # 
-      #   function = "http://api.lelylan.com/functions/4dcb9e23d033a9088902200d"
-      #   client.update_function(function, name: 'Set intensity')
-      #
-      def update_function(function, options = {})
-        put("/functions/#{find_id(function)}", options)
+      def update_function(id, params = {})
+        put("/functions/#{id}", params)
       end
 
-      # Public: Delete a function identified from its URI and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/functions/#delete Lelylan Dev Center}.
       #
-      # function - A String that represent the function URI.
-      # 
+      # Public: Delete a function identified from its ID and returns extended information for it.
+      #
+      # id - A String that represent the function ID.
+      #
       # Returns Hashie The deleted function.
       #
-      # Examples
-      # 
-      #   function = "http://api.lelylan.com/functions/4dcb9e23d033a9088902200a"
-      #   client.delete_function(function)
-      #
-      def delete_function(function)
-        delete("/functions/#{find_id(function)}")
+      def delete_function(id)
+        delete("/functions/#{id}")
       end
     end
   end
 end
-
-
-

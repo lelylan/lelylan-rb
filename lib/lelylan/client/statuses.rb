@@ -2,107 +2,71 @@ module Lelylan
   class Client
     module Statuses
 
-      # Public: Returns extended information for a given status identified from its URI.
-      # Find more at {http://dev.lelylan.com/rest/types/statuses/#get Lelylan Dev Center}.
       #
-      # status - A String that represent the status URI.
+      # Public: Returns extended information for a given status identified from its ID.
+      #
+      # id - A String that represent the status ID.
       #
       # Returns Hashie The status.
       #
-      # Examples
-      #
-      #   status = "http://api.lelylan.com/statuses/4dcb9e23d033a9088902200a"
-      #   client.status(status)
-      #
-      def status(status)
-        get("/statuses/#{find_id(status)}")
+      def status(id)
+        get("/statuses/#{id}")
       end
 
-      # Public: Returns a list of statuses.
-      # Find more at {http://dev.lelylan.com/rest/types/statuses/#all Lelylan Dev Center}.
       #
-      # options - The Hash option used to refine the search (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/types/statuses/#all API doc} for the accepted options.
-      # 
-      # Returns Hashie List of statuses.
+      # Public: Returns a list of owned statuses.
       #
-      # Examples
-      # 
-      #   # Retrurns the first 10 statuses
-      #   client.statuses(per: 10)
+      # params - The Hash used to refine the search (default: {}).
       #
-      #   # Returns the statuses where the name match with the desired string
-      #   client.statuses(name: 'Setting')
+      # Returns Array List of statuses.
       #
-      def statuses(options = {})
-        get("/statuses", options)
+      def statuses(params = {})
+        get('/statuses', params)
       end
 
-      # Public: Returns a list of all public statuses.
-      # Find more at {http://dev.lelylan.com/rest/statuses/core/#all Lelylan Dev Center}.
       #
-      # options - The Hash option used to refine the search (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/devices/statuses/#all API doc} for the accepted options.
-      # 
-      # Returns Hashie List of statuses.
+      # Public: Returns a list of all existing statuses.
       #
-      # Examples
-      # 
-      #   # Retrurns the first 10 public statuses
-      #   client.public_statuses(per: 10)
+      # params - The Hash used to refine the search (default: {}).
       #
-      def public_statuses(options = {})
-        get("/statuses/public", options)
+      # Returns Array List of statuses.
+      #
+      def public_statuses(params = {})
+        get('/statuses/public', params)
       end
 
+      #
       # Public: Create a status and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/statuses/#create Lelylan Dev Center}.
       #
-      # options - The Hash option used to create the resource (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/types/statuses/#create API doc} for the accepted options.
-      # 
+      # params - The Hash used to create the resource (default: {}).
+      #
       # Returns Hashie The created status.
       #
-      # Examples
-      # 
-      #   client.create_status(name: 'Setting status')
-      #
-      def create_status(options = {})
-        post("/statuses", options)
+      def create_status(params = {})
+        post('/statuses', params)
       end
 
-      # Public: Update a status identified from its URI and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/statuses/#update Lelylan Dev Center}.
       #
-      # status - A String that represents the status URI.
-      # options - The Hash option used to update the resource (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/types/statuses/#update API doc} for the accepted options.
-      # 
+      # Public: Update a status identified from its ID and returns extended information for it.
+      #
+      # id - A String that represent the status ID.
+      # params - The Hash used to update the resource (default: {}).
+      #
       # Returns Hashie The updated status.
       #
-      # Examples
-      # 
-      #   status = "http://api.lelylan.com/statuses/4dcb9e23d033a9088902200a"
-      #   client.update_status(status, pending: true)
-      #
-      def update_status(status, options = {})
-        put("/statuses/#{find_id(status)}", options)
+      def update_status(id, params = {})
+        put("/statuses/#{id}", params)
       end
 
-      # Public: Delete a status identified from its URI and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/statuses/#delete Lelylan Dev Center}.
       #
-      # status - A String that represent the status URI.
-      # 
+      # Public: Delete a status identified from its ID and returns extended information for it.
+      #
+      # id - A String that represent the status ID.
+      #
       # Returns Hashie The deleted status.
       #
-      # Examples
-      # 
-      #   status = "http://api.lelylan.com/statuses/4dcb9e23d033a9088902200a"
-      #   client.delete_status(status)
-      #
-      def delete_status(status)
-        delete("/statuses/#{find_id(status)}")
+      def delete_status(id)
+        delete("/statuses/#{id}")
       end
     end
   end

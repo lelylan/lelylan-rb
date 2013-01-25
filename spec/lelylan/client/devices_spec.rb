@@ -6,18 +6,14 @@ describe Lelylan::Client::Devices do
     a_client
   end
 
-  describe '#find_device' do
-
-    let(:uri) do
-      'http://api.lelylan.com/devices/1'
-    end
+  describe '#device' do
 
     before do
       stub_get('/devices/1').to_return(body: fixture('device.json'))
     end
 
     let!(:device) do
-      lelylan.find_device('1')
+      lelylan.device('1')
     end
 
     it 'returns the device' do
@@ -30,18 +26,34 @@ describe Lelylan::Client::Devices do
   end
 
 
-  describe '#all_devices' do
+  describe '#device_privates' do
 
-    let(:path) do
-      '/devices'
+    before do
+      stub_get('/devices/1/privates').to_return(body: fixture('device.json'))
     end
+
+    let!(:device) do
+      lelylan.device_privates('1')
+    end
+
+    it 'returns the device' do
+      device.id.should_not be_nil
+    end
+
+    it 'sends the request' do
+      a_get('/devices/1/privates').should have_been_made
+    end
+  end
+
+
+  describe '#devices' do
 
     before do
       stub_get('/devices').to_return(body: fixture('devices.json'))
     end
 
     let!(:devices) do
-      lelylan.all_devices
+      lelylan.devices
     end
 
     it 'returns a list of devices' do
@@ -55,15 +67,15 @@ describe Lelylan::Client::Devices do
     context 'with params' do
 
       before do
-        stub_get(path).with(query: {per: '25'}).to_return(body: fixture('device.json'))
+        stub_get('/devices').with(query: { per: '25' }).to_return(body: fixture('device.json'))
       end
 
       before do
-        lelylan.all_devices(per: 25)
+        lelylan.devices(per: 25)
       end
 
       it 'sends the params' do
-        a_get('/devices').with(query: {per: '25'}).should have_been_made
+        a_get('/devices').with(query: { per: '25' }).should have_been_made
       end
     end
   end

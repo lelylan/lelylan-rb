@@ -2,183 +2,157 @@ require 'helper'
 
 describe Lelylan::Client::Functions do
 
-  let(:client) do
+  let(:lelylan) do
     a_client
   end
 
-
-  describe '.function' do
-
-    let(:path) do
-      '/functions/4dcb9e23d033a9088900000a'
-    end
-
-    let(:uri) do
-      "http://api.lelylan.com/#{path}"
-    end
+  describe '#type' do
 
     before do
-      stub_get(path).to_return(body: fixture('function.json'))
+      stub_get('/types/1').to_return(body: fixture('type.json'))
     end
 
-    let!(:function) do
-      client.function(uri)
+    let!(:type) do
+      lelylan.type('1')
     end
 
-    it 'returns the function' do
-      function.uri.should_not be_nil
+    it 'returns the type' do
+      type.id.should_not be_nil
     end
 
     it 'sends the request' do
-      a_get(path).should have_been_made
+      a_get('/types/1').should have_been_made
     end
   end
 
 
-  describe '.public_functions' do
-
-    let(:path) do
-      '/functions/public'
-    end
+  describe '#types' do
 
     before do
-      client.user     = nil
-      client.password = nil
+      stub_get('/types').to_return(body: fixture('types.json'))
     end
 
-    before do
-      stub_get(path).to_return(body: fixture('functions.json'))
+    let!(:types) do
+      lelylan.types
     end
 
-    let!(:functions) do
-      client.public_functions
-    end
-
-    it 'returns a list of functions' do
-      functions.should have(1).item
+    it 'returns a list of types' do
+      types.should have(1).item
     end
 
     it 'sends the request' do
-      a_get('http://api.lelylan.com/functions/public').should have_been_made
-    end
-  end
-
-
-  describe '.functions' do
-
-    let(:path) do
-      '/functions'
-    end
-
-    before do
-      stub_get('/functions').to_return(body: fixture('functions.json'))
-    end
-
-    let!(:functions) do
-      client.functions
-    end
-
-    it 'returns a list of functions' do
-      functions.should have(1).item
-    end
-
-    it 'sends the request' do
-      a_get(path).should have_been_made
+      a_get('/types').should have_been_made
     end
 
     context 'with params' do
 
       before do
-        stub_get(path).with(query: {per: '25'}).to_return(body: fixture('function.json'))
+        stub_get('/types').with(query: { per: '25' }).to_return(body: fixture('type.json'))
       end
 
       before do
-        client.functions(per: 25)
+        lelylan.types(per: 25)
       end
 
       it 'sends the params' do
-        a_get(path).with(query: {per: '25'}).should have_been_made
+        a_get('/types').with(query: { per: '25' }).should have_been_made
       end
     end
   end
 
 
-  describe '.create_function' do
 
-    let(:path) do
-      '/functions'
-    end
+  describe '#public_types' do
 
     before do
-      stub_post(path).with(body: {name: 'Set intensity'}).to_return(body: fixture('function.json'))
+      stub_get('/types/public').to_return(body: fixture('types.json'))
     end
 
-    let!(:function) do
-      client.create_function(name: 'Set intensity')
+    let!(:types) do
+      lelylan.public_types
     end
 
-    it 'returns the function' do
-      function.uri.should_not be_nil
+    it 'returns a list of types' do
+      types.should have(1).item
     end
 
     it 'sends the request' do
-      a_post(path).with(body: {name: 'Set intensity'}).should have_been_made
+      a_get('/types/public').should have_been_made
+    end
+
+    context 'with params' do
+
+      before do
+        stub_get('/types/public').with(query: { per: '25' }).to_return(body: fixture('type.json'))
+      end
+
+      before do
+        lelylan.public_types(per: 25)
+      end
+
+      it 'sends the params' do
+        a_get('/types/public').with(query: { per: '25' }).should have_been_made
+      end
     end
   end
 
 
-  describe '.update_function' do
-
-    let(:path) do
-      '/functions/4dcb9e23d033a9088900000a'
-    end
-
-    let(:uri) do
-      "http://api.lelylan.com/#{path}"
-    end
+  describe '#create_type' do
 
     before do
-      stub_put(path).with(body: {name: 'Set intensity'}).to_return(body: fixture('function.json'))
+      stub_post('/types').with(body: { name: 'Set Intensity' }).to_return(body: fixture('type.json'))
     end
 
-    let!(:function) do
-      client.update_function(uri, name: 'Set intensity')
+    let!(:type) do
+      lelylan.create_type(name: 'Set Intensity')
     end
 
-    it 'returns the function' do
-      function.uri.should_not be_nil
+    it 'returns the type' do
+      type.id.should_not be_nil
     end
 
     it 'sends the request' do
-      a_put(path).with(body: {name: 'Set intensity'}).should have_been_made
+      a_post('/types').with(body: { name: 'Set Intensity' }).should have_been_made
     end
   end
 
 
-  describe '.delete_function' do
-
-    let(:path) do
-      '/functions/4dcb9e23d033a9088900000a'
-    end
-
-    let(:uri) do
-      "http://api.lelylan.com/#{path}"
-    end
+  describe '#update_type' do
 
     before do
-      stub_delete(path).to_return(body: fixture('function.json'))
+      stub_put('/types/1').with(body: { name: 'Set Intensity' }).to_return(body: fixture('type.json'))
     end
 
-    let!(:function) do
-      client.delete_function(uri)
+    let!(:type) do
+      lelylan.update_type('1', name: 'Set Intensity')
     end
 
-    it 'returns the function' do
-      function.uri.should_not be_nil
+    it 'returns the type' do
+      type.id.should_not be_nil
     end
 
     it 'sends the request' do
-      a_delete(path).should have_been_made
+      a_put('/types/1').with(body: { name: 'Set Intensity' }).should have_been_made
+    end
+  end
+
+
+  describe '#delete_type' do
+
+    before do
+      stub_delete('/types/1').to_return(body: fixture('type.json'))
+    end
+
+    let!(:type) do
+      lelylan.delete_type('1')
+    end
+
+    it 'returns the type' do
+      type.id.should_not be_nil
+    end
+
+    it 'sends the request' do
+      a_delete('/types/1').should have_been_made
     end
   end
 end

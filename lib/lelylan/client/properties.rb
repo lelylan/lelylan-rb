@@ -2,111 +2,71 @@ module Lelylan
   class Client
     module Properties
 
-      # Public: Returns extended information for a given property identified from its URI.
-      # Find more at {http://dev.lelylan.com/rest/types/properties/#get Lelylan Dev Center}.
       #
-      # property - A String that represent the property URI.
+      # Public: Returns extended information for a given property identified from its ID.
+      #
+      # id - A String that represent the property ID.
       #
       # Returns Hashie The property.
       #
-      # Examples
-      #
-      #   property = "http://api.lelylan.com/properties/4dcb9e23d033a9088902200a"
-      #   client.property(property)
-      #
-      def property(property)
-        get("/properties/#{find_id(property)}")
+      def property(id)
+        get("/properties/#{id}")
       end
 
-      # Public: Returns a list of properties.
-      # Find more at {http://dev.lelylan.com/rest/types/properties/#all Lelylan Dev Center}.
       #
-      # options - The Hash option used to refine the search (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/types/properties/#all API doc} for the accepted options.
-      # 
-      # Returns Hashie List of properties.
+      # Public: Returns a list of owned properties.
       #
-      # Examples
-      # 
-      #   # Retrurns the first 10 properties
-      #   client.properties(per: 10)
+      # params - The Hash used to refine the search (default: {}).
       #
-      #   # Returns the properties where the name match with the desired string
-      #   client.properties(name: 'Intensity')
+      # Returns Array List of properties.
       #
-      def properties(options = {})
-        get("/properties", options)
+      def properties(params = {})
+        get('/properties', params)
       end
 
-      # Public: Returns a list of properties.
-      # Find more at {http://dev.lelylan.com/rest/properties/properties/#all Lelylan Dev Center}.
       #
-      # options - The Hash option used to refine the search (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/properties/properties/#all API doc} for the accepted options.
-      # 
-      # Returns Hashie List of properties.
+      # Public: Returns a list of all existing properties.
       #
-      # Examples
-      # 
-      #   # Retrurns the first 10 properties
-      #   client.properties(per: 10)
+      # params - The Hash used to refine the search (default: {}).
       #
-      #   # Returns the properties where the name match with the desired string
-      #   client.properties(name: 'Intensity')
+      # Returns Array List of types.
       #
-      def public_properties(options = {})
-        get("/properties/public", options)
+      def public_properties(params = {})
+        get('/properties/public', params)
       end
 
+      #
       # Public: Create a property and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/properties/#create Lelylan Dev Center}.
       #
-      # options - The Hash option used to create the resource (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/types/properties/#create API doc} for the accepted options.
-      # 
+      # params - The Hash used to create the resource (default: {}).
+      #
       # Returns Hashie The created property.
       #
-      # Examples
-      #
-      #   values = 1..100.to_a # [0, 1, 2, 3, 4, ..., 99, 100]
-      #   client.create_property(name: 'Intensity', default: '0', values: values)
-      #
-      def create_property(options = {})
-        post("/properties", options)
+      def create_property(params = {})
+        post('/properties', params)
       end
 
-      # Public: Update a property identified from its URI and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/properties/#update Lelylan Dev Center}.
       #
-      # property - A String that represents the property URI.
-      # options - The Hash option used to update the resource (default: {}). 
-      #           Check out the {http://dev.lelylan.com/rest/types/properties/#update API doc} for the accepted options.
-      # 
+      # Public: Update a property identified from its ID and returns extended information for it.
+      #
+      # id - A String that represent the property ID.
+      # params - The Hash used to update the resource (default: {}).
+      #
       # Returns Hashie The updated property.
       #
-      # Examples
-      # 
-      #   property = "http://api.lelylan.com/properties/4dcb9e23d033a9088902200a"
-      #   client.update_property(property, default: '100')
-      #
-      def update_property(property, options = {})
-        put("/properties/#{find_id(property)}", options)
+      def update_property(id, params = {})
+        put("/properties/#{id}", params)
       end
 
-      # Public: Delete a property identified from its URI and returns extended information for it.
-      # Find more at {http://dev.lelylan.com/rest/types/properties/#delete Lelylan Dev Center}.
       #
-      # property - A String that represent the property URI.
-      # 
+      # Public: Delete a property identified from its ID and returns extended information for it.
+      #
+      # id - A String that represent the property ID.
+      #
       # Returns Hashie The deleted property.
       #
-      # Examples
-      # 
-      #   property = "http://api.lelylan.com/properties/4dcb9e23d033a9088902200a"
-      #   client.delete_property(property)
-      #
-      def delete_property(property)
-        delete("/properties/#{find_id(property)}")
+      def delete_property(id)
+        delete("/properties/#{id}")
       end
     end
   end
