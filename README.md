@@ -36,8 +36,7 @@ gem 'lelylan-rb', require: 'lelylan', git: 'https://github.com/lelylan/lelylan-r
 ### Require Gem
 
 ```ruby
-require 'rubygems'
-require 'lelylan-rb'
+require 'lelylan'
 require 'oauth2'
 ```
 

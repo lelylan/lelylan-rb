@@ -6,7 +6,7 @@ module Lelylan
   module Connection
     private
 
-    def connection(authenticate=true, raw=false, version=0, force_urlencoded=false, path='')
+    def connection(authenticate=true, raw=false, version=0, force_urlencoded=false, path='', method)
 
       options = {
         :headers => {'Accept' => 'application/json', 'User-Agent' => user_agent, 'Content-Type' => 'application/json'},
@@ -25,6 +25,8 @@ module Lelylan
         basic = Base64.encode64("#{self.client_id}:#{self.client_secret}")
         options[:headers].merge!('Authorization' => "Bearer #{basic}")
       end
+
+      options[:headers].merge!('Content-Length' => '0') if method == :delete
 
       connection = Faraday.new(options) do |builder|
         builder.request :json
