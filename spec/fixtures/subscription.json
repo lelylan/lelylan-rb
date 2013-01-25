@@ -1,0 +1,10 @@
+{
+  "uri": "http://api.lelylan.com/subscriptions/508acdffd033a9ea77000026",
+  "id": "508acdffd033a9ea77000026",
+  "client": { "uri": "http://people.lelylan.com/oauth/applications/508acdffd033a9ea77025" },
+  "resource": "devices",
+  "event": "property-update",
+  "callback_uri": "http://callback.com/lelylan",
+  "created_at": "2012-10-26T17:53:03Z",
+  "updated_at": "2012-10-26T17:53:03Z"
+}
