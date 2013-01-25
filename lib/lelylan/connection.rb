@@ -5,7 +5,7 @@ module Lelylan
   module Connection
     private
 
-    def connection(authenticate=true, raw=false, version=0, force_urlencoded=false)
+    def connection(authenticate=true, raw=false, version=0, force_urlencoded=false, path='')
 
       options = {
         :headers => {'Accept' => 'application/json', 'User-Agent' => user_agent, 'Content-Type' => 'application/json'},
@@ -16,7 +16,7 @@ module Lelylan
 
       if authenticated?
         self.token = token.refresh! if token.expired?
-        options[:headers].merge!('Authorization' => "Bearer #{token.token}") 
+        options[:headers].merge!('Authorization' => "Bearer #{token.token}")
       end
 
       connection = Faraday.new(options) do |builder|
@@ -26,6 +26,8 @@ module Lelylan
         builder.use FaradayMiddleware::ParseJson
         builder.adapter(adapter)
       end
+
+      connection.basic_auth(self.client_id, self.client_secret) if path =~ /subscriptions/
 
       connection
     end

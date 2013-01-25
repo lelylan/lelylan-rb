@@ -28,20 +28,6 @@ module Lelylan
       request(:put, path, options, authenticate, raw, version, force_urlencoded)
     end
 
-    # Internal: Gets the user requests limit.
-    def ratelimit
-      headers = get("/ratelimit",{}, true, true).headers
-      return headers["X-RateLimit-Limit"].to_i
-    end
-    alias rate_limit ratelimit
-
-    # Internal: Gets the remaining user requests.
-    def ratelimit_remaining
-      headers = get("/ratelimit",{}, api_version, true, true).headers
-      return headers["X-RateLimit-Remaining"].to_i
-    end
-    alias rate_limit_remaining ratelimit_remaining
-
     private
 
     # Internal: Perform the HTTP request.
@@ -51,10 +37,10 @@ module Lelylan
     # options - The Hash options containing the params to send to the
     #           service.
     # authenticate - The Boolean value that authenticate the user.
-    # raw - The Boolean value let return the complete response. 
+    # raw - The Boolean value let return the complete response.
     # force_urlencoded - The Boolean value that force the url encoding.
     def request(method, path, options, authenticate, raw, version, force_urlencoded)
-      response = connection(authenticate, raw, version, force_urlencoded).send(method) do |request|
+      response = connection(authenticate, raw, version, force_urlencoded, path).send(method) do |request|
         case method
         when :delete, :get
           request.url(path, options)

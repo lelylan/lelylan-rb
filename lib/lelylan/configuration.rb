@@ -9,8 +9,8 @@ module Lelylan
       :api_endpoint,
       :web_endpoint,
       :endpoint,
-      :user,
-      :password,
+      :client_id,
+      :client_secret,
       :proxy,
       :token,
       :user_agent,
@@ -54,8 +54,8 @@ module Lelylan
       self.api_version    = DEFAULT_API_VERSION
       self.api_endpoint   = DEFAULT_API_ENDPOINT
       self.web_endpoint   = DEFAULT_WEB_ENDPOINT
-      self.user           = nil
-      self.password       = nil
+      self.client_id      = nil
+      self.client_secret  = nil
       self.proxy          = nil
       self.token          = nil
       self.user_agent     = DEFAULT_USER_AGENT
