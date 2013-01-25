@@ -1,3 +1,4 @@
+require 'base64'
 require 'faraday_middleware'
 require 'faraday/response/raise_http_error'
 
@@ -19,6 +20,12 @@ module Lelylan
         options[:headers].merge!('Authorization' => "Bearer #{token.token}")
       end
 
+      if path =~ /subscriptions/
+        raise Lelylan::Error, 'To make a request to the realtime services you need both client id and client secret' if (!client_id or !client_secret) and path =~ /subscriptions/
+        basic = Base64.encode64("#{self.client_id}:#{self.client_secret}")
+        options[:headers].merge!('Authorization' => "Bearer #{basic}")
+      end
+
       connection = Faraday.new(options) do |builder|
         builder.request :json
         builder.use Faraday::Response::RaiseHttpError
@@ -26,8 +33,6 @@ module Lelylan
         builder.use FaradayMiddleware::ParseJson
         builder.adapter(adapter)
       end
-
-      connection.basic_auth(self.client_id, self.client_secret) if path =~ /subscriptions/
 
       connection
     end

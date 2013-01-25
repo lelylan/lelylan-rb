@@ -3,7 +3,7 @@ require 'helper'
 describe Lelylan::Client::Subscription do
 
   let(:lelylan) do
-    Lelylan::Client.new client_id: 'isoadoisadadasa', client_secret: 'adkdakjsdhjksha'
+    Lelylan::Client.new client_id: 'id', client_secret: 'secret'
   end
 
   let(:basic) do
@@ -30,97 +30,115 @@ describe Lelylan::Client::Subscription do
   end
 
 
-  #describe '#subscriptions' do
+  describe '#subscriptions' do
 
-    #before do
-      #stub_get('/subscriptions').to_return(body: fixture('subscriptions.json'))
-    #end
+    before do
+      stub_get('/subscriptions').to_return(body: fixture('subscriptions.json'))
+    end
 
-    #let!(:subscriptions) do
-      #lelylan.subscriptions
-    #end
+    let!(:subscriptions) do
+      lelylan.subscriptions
+    end
 
-    #it 'returns a list of subscriptions' do
-      #subscriptions.should have(1).item
-    #end
+    it 'returns a list of subscriptions' do
+      subscriptions.should have(1).item
+    end
 
-    #it 'sends the request' do
-      #a_get('/subscriptions').with(headers: { Authorization: basic }).should have_been_made
-    #end
+    it 'sends the request' do
+      a_get('/subscriptions').with(headers: { Authorization: basic }).should have_been_made
+    end
 
-    #context 'with params' do
+    context 'with params' do
 
-      #before do
-        #stub_get('/subscriptions').with(query: { per: '25' }).to_return(body: fixture('subscription.json'))
-      #end
+      before do
+        stub_get('/subscriptions').with(query: { per: '25' }).to_return(body: fixture('subscription.json'))
+      end
 
-      #before do
-        #lelylan.subscriptions(per: 25)
-      #end
+      before do
+        lelylan.subscriptions(per: 25)
+      end
 
-      #it 'sends the params' do
-        #a_get('/subscriptions').with(headers: { Authorization: basic }).with(query: { per: '25' }).should have_been_made
-      #end
-    #end
-  #end
-
-
-  #describe '#create_subscription' do
-
-    #before do
-      #stub_post('/subscriptions').with(headers: { Authorization: basic }).with(body: { name: 'Bedroom' }).to_return(body: fixture('subscription.json'))
-    #end
-
-    #let!(:subscription) do
-      #lelylan.create_subscription(name: 'Bedroom')
-    #end
-
-    #it 'returns the subscription' do
-      #subscription.id.should_not be_nil
-    #end
-
-    #it 'sends the request' do
-      #a_post('/subscriptions').with(headers: { Authorization: basic }).with(body: { name: 'Bedroom' }).should have_been_made
-    #end
-  #end
+      it 'sends the params' do
+        a_get('/subscriptions').with(headers: { Authorization: basic }).with(query: { per: '25' }).should have_been_made
+      end
+    end
+  end
 
 
-  #describe '#update_subscription' do
+  describe '#create_subscription' do
 
-    #before do
-      #stub_put('/subscriptions/1').with(body: { name: 'Bedroom' }).to_return(body: fixture('subscription.json'))
-    #end
+    before do
+      stub_post('/subscriptions').with(headers: { Authorization: basic }).with(body: { name: 'Bedroom' }).to_return(body: fixture('subscription.json'))
+    end
 
-    #let!(:subscription) do
-      #lelylan.update_subscription('1', name: 'Bedroom')
-    #end
+    let!(:subscription) do
+      lelylan.create_subscription(name: 'Bedroom')
+    end
 
-    #it 'returns the subscription' do
-      #subscription.id.should_not be_nil
-    #end
+    it 'returns the subscription' do
+      subscription.id.should_not be_nil
+    end
 
-    #it 'sends the request' do
-      #a_put('/subscriptions/1').with(headers: { Authorization: basic }).with(body: { name: 'Bedroom' }).should have_been_made
-    #end
-  #end
+    it 'sends the request' do
+      a_post('/subscriptions').with(headers: { Authorization: basic }).with(body: { name: 'Bedroom' }).should have_been_made
+    end
+  end
 
 
-  #describe '#delete_subscription' do
+  describe '#update_subscription' do
 
-    #before do
-      #stub_delete('/subscriptions/1').to_return(body: fixture('subscription.json'))
-    #end
+    before do
+      stub_put('/subscriptions/1').with(body: { name: 'Bedroom' }).to_return(body: fixture('subscription.json'))
+    end
 
-    #let!(:subscription) do
-      #lelylan.delete_subscription('1')
-    #end
+    let!(:subscription) do
+      lelylan.update_subscription('1', name: 'Bedroom')
+    end
 
-    #it 'returns the subscription' do
-      #subscription.id.should_not be_nil
-    #end
+    it 'returns the subscription' do
+      subscription.id.should_not be_nil
+    end
 
-    #it 'sends the request' do
-      #a_delete('/subscriptions/1').with(headers: { Authorization: basic }).should have_been_made
-    #end
-  #end
+    it 'sends the request' do
+      a_put('/subscriptions/1').with(headers: { Authorization: basic }).with(body: { name: 'Bedroom' }).should have_been_made
+    end
+  end
+
+
+  describe '#delete_subscription' do
+
+    before do
+      stub_delete('/subscriptions/1').to_return(body: fixture('subscription.json'))
+    end
+
+    let!(:subscription) do
+      lelylan.delete_subscription('1')
+    end
+
+    it 'returns the subscription' do
+      subscription.id.should_not be_nil
+    end
+
+    it 'sends the request' do
+      a_delete('/subscriptions/1').with(headers: { Authorization: basic }).should have_been_made
+    end
+  end
+
+  describe 'when a client param misses' do
+
+    let(:client) do
+      Lelylan::Client.new client_id: 'id'
+    end
+
+    describe '#subscription' do
+
+      before do
+        stub_get('/subscriptions/1').to_return(body: fixture('subscription.json'))
+      end
+
+      it 'raises a Lelylan::Error' do
+        expect{ client.subscription('1') }.to raise_error(Lelylan::Error, /you need both client id and client secret/)
+      end
+    end
+  end
 end
