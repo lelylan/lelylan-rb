@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.0.3 (January 25, 2013)
+
+* Added content lenght 0 for all DELETE requests
+
 ## v0.0.2 (January 25, 2013)
 
 * Added subscription services
