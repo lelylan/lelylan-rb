@@ -200,7 +200,7 @@ Through the error message attribute you can access the error information.
 ```ruby
 begin
   @type = Lelylan::Type.type("https://type.lelylan.com/types/wrong")
-rescue Lelylan::NotFound => e
+rescue Lelylan::Error => e
   puts "The resource #{e.message.error.uri} was not found"
 end
 ```
