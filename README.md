@@ -53,8 +53,10 @@ related documentation in the [dev center](http://dev.lelylan.com/api/oauth#langu
 oauth = OAuth2::Client.new(client_id, client_secret, site: site)
 
 # Redirect the application to the Lelylan authorization page
-redirect oauth.auth_code.authorize_url(redirect_uri: redirect_uri)
-# => http://people.lelylan.com/oauth/authorize?redirect_uri=http://localhost:3000/callback&scope=devices&response_type=code&client_id=<client-id>
+redirect oauth.auth_code.authorize_url(redirect_uri: redirect_uri, scope: scope)
+# => http://people.lelylan.com/oauth/authorize?
+#      redirect_uri=http://localhost:3000/callback&
+#      scope=<scope>&response_type=code&client_id=<client-id>
 
 # Get the access token object (authorization code is given from the previous step)
 token = oauth.auth_code.get_token(params[:code], redirect_uri: redirect_uri)
@@ -89,78 +91,61 @@ subscriptions = lelylan.subscriptions
 
 ### Implemented Services
 
-#### Devices
-
-The Device API defines a set of services to monitor and control every existing device.
-Its final goal is to map every device to a unique URI which provides control over it.
+**Devices** - The Device API defines a set of services to monitor and control every existing
+device. Its final goal is to map every device to a unique URI which provides control over it.
 [See examples](http://dev.lelylan.com/api/devices#ruby).
 
-#### Histories
+**Activations** - Easy way to move the device ownership between people.
+[See examples](http://dev.lelylan.com/api/devices#ruby).
 
-When a device updates its properties or executes a function a new history resource with
-a snapshot of all device properties is created by Lelylan, also the ones that has not been
-updated. This makes it easy to recreate previous device status and extract usage patterns
-to improve the way people live their house.
+**Histories** - When a device updates its properties or executes a function a new history
+resource with a snapshot of all device properties is created by Lelylan, also the ones that
+has not been updated. This makes it easy to recreate previous device status and extract usage
+patterns to improve the way people live their house.
 [See examples](http://dev.lelylan.com/api/devices/histories#ruby).
 
-#### Types
-
-A type describes the structure of a device. In its simplest form every type can be defined
-as the combination of three key elements: properties (what vary during time), functions
+**Types** - A type describes the structure of a device. In its simplest form every type can be
+defined as the combination of three key elements: properties (what vary during time), functions
 (what a device can do), statuses (what a device is in a specific time of its life).
 [See examples](http://dev.lelylan.com/api/types#ruby).
 
-#### Properties
-
-A property is whatever vary in a device during time. It can be the intensity in a dimmer,
-the temperature in a cooling system or the volume in a television.
+**Properties** - A property is whatever vary in a device during time. It can be the intensity in
+a dimmer, the temperature in a cooling system or the volume in a television.
 [See examples](http://dev.lelylan.com/api/types/properties#ruby).
 
-#### Functions
-
-Functions defines the daily interactions you have with the devices in your house, for
-example when you turn on a light, close a door or raise the temperature in a room.
+**Functions** - Functions defines the daily interactions you have with the devices in your house,
+for example when you turn on a light, close a door or raise the temperature in a room.
 With functions you can control any device in the same way you do everyday of your life.
 [See examples](http://dev.lelylan.com/api/types/functions#ruby).
 
-#### Statuses
-
-Properties are not always enough to describe the status of a device. Think at a roller
+**Statuses** - Properties are not always enough to describe the status of a device. Think at a roller
 shutter for example. It has the property aperture that is 100 when open or 0 when closed.
 But what if the roller shutter is opening? It is nether open or close. To have a complete
 control over the device status in a specific moment of its life is to use the status API.
 [See examples](http://dev.lelylan.com/api/types/statuses#ruby).
 
-#### Locations
-
-Locations are the places we live in and where physical devices are placed. Lelylan identifies
+**Locations** - Locations are the places we live in and where physical devices are placed. Lelylan identifies
 three types of locations usually organized in a hierarchical structure: houses, floors and
 rooms.
 [See examples](http://dev.lelylan.com/api/locations#ruby).
 
-#### Physical devices
-
-Physical devices are the real objects you physically interact with everyday of your life
+**Physical Devices** - Physical devices are the real objects you physically interact with everyday of your life
 like lights, appliances, alarms and more. To enable the communication between Lelylan and
 physical devices they should provide a simple set of web services.
 [See examples](http://dev.lelylan.com/api/physicals#ruby).
 
-#### Subscriptions
-
-Get real-time updates by subscribing to a resource and its related event.
+**Subscriptions** -cGet real-time updates by subscribing to a resource and its related event.
 [See examples](http://dev.lelylan.com/api/realtime#ruby).
 
-#### Authenticated User Profile
-
-Returns extended information for the authenticated user.
+**User Profile** -cReturns extended information for the authenticated user.
 [See examples](http://dev.lelylan.com/api/core#get-a-user-ruby).
 
 
-## Authorization flows
+### Authorization flows
 
 Lelylan support three OAuth2 authorization flows.
 
-### Authorization code flows
+#### Authorization code flows
 
 ```ruby
 oauth = OAuth2::Client.new(client_id, client_secret, site: site)
@@ -168,7 +153,7 @@ redirect oauth.auth_code.authorize_url(redirect_uri: redirect_uri)
 token = oauth.auth_code.get_token(params[:code], redirect_uri: redirect_uri)
 ```
 
-### Implicit grant flow
+#### Implicit grant flow
 
 ```ruby
 oauth = OAuth2::Client.new(client_id, client_secret, site: site)
@@ -176,7 +161,7 @@ redirect oauth.auth_code.authorize_url(redirect_uri: redirect_uri)
 token = OAuth2::AccessToken.from_kvform(client, params)
 ```
 
-### Resource owner password credentials flow
+#### Resource owner password credentials flow
 
 ```ruby
 oauth = OAuth2::Client.new(client_id, client_secret, site: site)
@@ -186,7 +171,7 @@ token = oauth.password.get_token('email', 'password')
 Access tokens, when expired, are automatically refreshed.
 
 
-## Errors
+### Errors
 
 Exceptions are raised when a 4xx or 5xx status code is returned.
 
@@ -212,9 +197,9 @@ end
 Learn more about the [error response structure](http://dev.lelylan.com/api/core#errors).
 
 
-## Configurations
+### Configurations
 
-### API endpoint
+#### API endpoint
 
 Configuration block.
 
@@ -257,23 +242,23 @@ $ irb -I lib/
 $ > require 'lelylan'
 ```
 
-## Spec guidelines
+### Spec guidelines
 
 Follow [rspec best practices](http://betterspecs.org) guidelines.
 
 
-## Coding guidelines
+### Coding guidelines
 
 Follow [github](https://github.com/styleguide/) guidelines.
 
 
-## Feedback
+### Feedback
 
 Use the [issue tracker](http://github.com/lelylan/lelylan-rb/issues) for bugs.
 [Mail](mailto:touch@lelylan.com) or [Tweet](http://twitter.com/lelylan) us for any idea that can improve the project.
 
 
-## Links
+### Links
 
 * [GIT Repository](http://github.com/lelylan/lelylan-rb)
 * [Lelylan Ruby Website](http://lelylan.github.com/lelylan-rb).
