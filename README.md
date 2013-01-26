@@ -134,7 +134,7 @@ like lights, appliances, alarms and more. To enable the communication between Le
 physical devices they should provide a simple set of web services.
 [See examples](http://dev.lelylan.com/api/physicals#ruby).
 
-**Subscriptions** -Get real-time updates by subscribing to a resource and its related event.
+**Subscriptions** - Get realtime updates by subscribing to a resource and its related event.
 [See examples](http://dev.lelylan.com/api/realtime#ruby).
 
 **User Profile** -cReturns extended information for the authenticated user.
