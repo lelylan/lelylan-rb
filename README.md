@@ -72,11 +72,9 @@ lelylan = Lelylan::Client.new(token: token)
 # Get the first device where the name matches with Dimmer.
 device = lelylan.devices(name: 'Dimmer').first
 
-# The client returns an Hashie object (https://github.com/intridea/hashie)
-puts device.uri # see the device uri
-puts device.properties.first.value # see the first device property value
-
-#
+# The client returns an Hashie (https://github.com/intridea/hashie)
+puts device.uri # get the device uri
+puts device.properties.first.value # get the first device property value
 ```
 
 ### Realtime services
