@@ -23,10 +23,18 @@ module Lelylan
 
         digest    = OpenSSL::Digest::Digest.new('sha1')
         signature = OpenSSL::HMAC.hexdigest(digest, secret, params.to_json.to_s)
-        headers   = { 'X-Physical-Signature' => signature, 'Content-Type' => 'application/json' }
+        headers   = { 'X-Physical-Signature' => signature }
 
-        request  = Faraday.new
+        request  = Faraday.new do |builder|
+          builder.request :json
+          builder.use Faraday::Response::RaiseHttpError
+          builder.use FaradayMiddleware::Mashify
+          builder.use FaradayMiddleware::ParseJson
+          builder.adapter(adapter)
+        end
+
         response = request.put(uri, params, headers)
+
         response.body
       end
     end

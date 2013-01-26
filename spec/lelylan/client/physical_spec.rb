@@ -9,7 +9,7 @@ describe Lelylan::Client::Type do
   describe '#physical_properties' do
 
     before do
-      stub_request(:put, 'http://mqtt.lelylan.com/devices/1').to_return(status: 202)
+      stub_request(:put, 'http://mqtt.lelylan.com/devices/1').to_return(status: 202, body: fixture('device.json'))
     end
 
     let!(:device) do
@@ -17,7 +17,8 @@ describe Lelylan::Client::Type do
     end
 
     it 'returns the type' do
-      device.should be_nil
+      pp device
+      device.id.should_not be_nil
     end
 
     it 'sends the request' do
