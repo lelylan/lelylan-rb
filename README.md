@@ -175,9 +175,12 @@ Exceptions are raised when a 4xx or 5xx status code is returned.
 
     Lelylan::BadRequest            # 400
     Lelylan::Unauthorized          # 401
+    Lelylan::Forbidden             # 403
     Lelylan::NotFound              # 404
+    Lelylan::NotAcceptable         # 406
     Lelylan::NotValid              # 422
     Lelylan::InternalServerError   # 500
+    Lelylan::NotImplemented        # 501
     Lelylan::BadGateway            # 502
     Lelylan::ServiceUnavailable    # 503
 
