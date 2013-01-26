@@ -69,8 +69,14 @@ following example shows how to print in the console a list of owned devices.
 # Initialize Lelylan client
 lelylan = Lelylan::Client.new(token: token)
 
-# Get the first device where the name matches with Dimmer
+# Get the first device where the name matches with Dimmer.
 device = lelylan.devices(name: 'Dimmer').first
+
+# The client returns an Hashie object (https://github.com/intridea/hashie)
+puts device.uri # see the device uri
+puts device.properties.first.value # see the first device property value
+
+#
 ```
 
 ### Realtime services
