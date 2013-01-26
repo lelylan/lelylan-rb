@@ -188,10 +188,13 @@ Through the error message attribute you can access the error information.
 begin
   device = lelylan.device('<id>')
 rescue Lelylan::Error => e
-  puts "The resource #{e.message.error.uri} was not found"
+  puts e.message
 end
 ```
 
+Unluckily the `#message` method can only be a string. For this reason we
+can't return a JSON structure when lelylan offers it, but we return the
+`error.description` value.
 Learn more about the [error response structure](http://dev.lelylan.com/api/core#errors).
 
 

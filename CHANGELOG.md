@@ -2,6 +2,7 @@
 
 ## v0.0.4 (January 26, 2013)
 
+* Full support to error handling
 * Fixed physical device request
 * Fixed HTTP Basic Authentication system for subscription services
 * Made some extra tests to check the fact that delete services are
