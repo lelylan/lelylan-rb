@@ -6,7 +6,7 @@ module Lelylan
   module Connection
     private
 
-    def connection(authenticate=true, raw=false, version=0, force_urlencoded=false, path='', method)
+    def connection(method='get', path='', authenticate=true, raw=false, version=0, force_urlencoded=false)
 
       options = {
         :headers => {'Accept' => 'application/json', 'User-Agent' => user_agent, 'Content-Type' => 'application/json'},
@@ -22,14 +22,15 @@ module Lelylan
 
       if path =~ /subscriptions/
         raise Lelylan::Error, 'To make a request to the realtime services you need both client id and client secret' if (!client_id or !client_secret) and path =~ /subscriptions/
-        basic = Base64.encode64("#{self.client_id}:#{self.client_secret}")
-        options[:headers].merge!('Authorization' => "Bearer #{basic}")
       end
 
-      options[:headers].merge!('Content-Length' => '0') if method == :delete
+      if method == :delete
+        options[:headers].merge!('Content-Length' => '0')
+      end
 
       connection = Faraday.new(options) do |builder|
         builder.request :json
+        builder.use Faraday::Request::BasicAuthentication, self.client_id, self.client_secret if path =~ /subscriptions/
         builder.use Faraday::Response::RaiseHttpError
         builder.use FaradayMiddleware::Mashify
         builder.use FaradayMiddleware::ParseJson

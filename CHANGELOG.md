@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.0.4 (January 26, 2013)
+
+* Fixed HTTP Basic Authentication system for subscription services
+* Made some extra tests to check the fact that delete services are
+  correctly working
+
 ## v0.0.3 (January 25, 2013)
 
 * Added content lenght 0 for all DELETE requests

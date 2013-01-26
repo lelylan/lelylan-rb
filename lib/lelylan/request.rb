@@ -40,7 +40,7 @@ module Lelylan
     # raw - The Boolean value let return the complete response.
     # force_urlencoded - The Boolean value that force the url encoding.
     def request(method, path, options, authenticate, raw, version, force_urlencoded)
-      response = connection(authenticate, raw, version, force_urlencoded, path, method).send(method) do |request|
+      response = connection(method, path, authenticate, raw, version, force_urlencoded).send(method) do |request|
         case method
         when :delete, :get
           request.url(path, options)

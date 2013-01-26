@@ -13,7 +13,7 @@ describe Lelylan::Client::Subscription do
   describe '#subscription' do
 
     before do
-      stub_get('/subscriptions/1').to_return(body: fixture('subscription.json'))
+      stub_request(:get, 'http://id:secret@api.lelylan.com/subscriptions/1').to_return(body: fixture('subscription.json'))
     end
 
     let!(:subscription) do
@@ -25,7 +25,7 @@ describe Lelylan::Client::Subscription do
     end
 
     it 'sends the request' do
-      a_get('/subscriptions/1').with(headers: { Authorization: basic }).should have_been_made
+      a_request(:get, 'http://id:secret@api.lelylan.com/subscriptions/1').should have_been_made
     end
   end
 
@@ -33,7 +33,7 @@ describe Lelylan::Client::Subscription do
   describe '#subscriptions' do
 
     before do
-      stub_get('/subscriptions').to_return(body: fixture('subscriptions.json'))
+      stub_request(:get, 'http://id:secret@api.lelylan.com/subscriptions').to_return(body: fixture('subscriptions.json'))
     end
 
     let!(:subscriptions) do
@@ -45,13 +45,13 @@ describe Lelylan::Client::Subscription do
     end
 
     it 'sends the request' do
-      a_get('/subscriptions').with(headers: { Authorization: basic }).should have_been_made
+      a_request(:get, 'http://id:secret@api.lelylan.com/subscriptions').should have_been_made
     end
 
     context 'with params' do
 
       before do
-        stub_get('/subscriptions').with(query: { per: '25' }).to_return(body: fixture('subscription.json'))
+        stub_request(:get, 'http://id:secret@api.lelylan.com/subscriptions').with(query: { per: '25' }).to_return(body: fixture('subscription.json'))
       end
 
       before do
@@ -59,7 +59,7 @@ describe Lelylan::Client::Subscription do
       end
 
       it 'sends the params' do
-        a_get('/subscriptions').with(headers: { Authorization: basic }).with(query: { per: '25' }).should have_been_made
+        a_request(:get, 'http://id:secret@api.lelylan.com/subscriptions').with(query: { per: '25' }).should have_been_made
       end
     end
   end
@@ -68,11 +68,11 @@ describe Lelylan::Client::Subscription do
   describe '#create_subscription' do
 
     before do
-      stub_post('/subscriptions').with(headers: { Authorization: basic }).with(body: { name: 'Bedroom' }).to_return(body: fixture('subscription.json'))
+      stub_request(:post, 'http://id:secret@api.lelylan.com/subscriptions').with(body: { event: 'property-update' }).to_return(body: fixture('subscription.json'))
     end
 
     let!(:subscription) do
-      lelylan.create_subscription(name: 'Bedroom')
+      lelylan.create_subscription(event: 'property-update')
     end
 
     it 'returns the subscription' do
@@ -80,7 +80,7 @@ describe Lelylan::Client::Subscription do
     end
 
     it 'sends the request' do
-      a_post('/subscriptions').with(headers: { Authorization: basic }).with(body: { name: 'Bedroom' }).should have_been_made
+      a_request(:post, 'http://id:secret@api.lelylan.com/subscriptions').with(body: { event: 'property-update' }).should have_been_made
     end
   end
 
@@ -88,11 +88,11 @@ describe Lelylan::Client::Subscription do
   describe '#update_subscription' do
 
     before do
-      stub_put('/subscriptions/1').with(body: { name: 'Bedroom' }).to_return(body: fixture('subscription.json'))
+      stub_request(:put, 'http://id:secret@api.lelylan.com/subscriptions/1').with(body: { event: 'delete' }).to_return(body: fixture('subscription.json'))
     end
 
     let!(:subscription) do
-      lelylan.update_subscription('1', name: 'Bedroom')
+      lelylan.update_subscription('1', event: 'delete')
     end
 
     it 'returns the subscription' do
@@ -100,7 +100,7 @@ describe Lelylan::Client::Subscription do
     end
 
     it 'sends the request' do
-      a_put('/subscriptions/1').with(headers: { Authorization: basic }).with(body: { name: 'Bedroom' }).should have_been_made
+      a_request(:put, 'http://id:secret@api.lelylan.com/subscriptions/1').with(body: { event: 'delete' }).should have_been_made
     end
   end
 
@@ -108,7 +108,7 @@ describe Lelylan::Client::Subscription do
   describe '#delete_subscription' do
 
     before do
-      stub_delete('/subscriptions/1').to_return(body: fixture('subscription.json'))
+      stub_request(:delete, 'http://id:secret@api.lelylan.com/subscriptions/1').to_return(body: fixture('subscription.json'))
     end
 
     let!(:subscription) do
@@ -120,9 +120,10 @@ describe Lelylan::Client::Subscription do
     end
 
     it 'sends the request' do
-      a_delete('/subscriptions/1').with(headers: { Authorization: basic }).should have_been_made
+      a_request(:delete, 'http://id:secret@api.lelylan.com/subscriptions/1').should have_been_made
     end
   end
+
 
   describe 'when a client param misses' do
 
@@ -133,7 +134,7 @@ describe Lelylan::Client::Subscription do
     describe '#subscription' do
 
       before do
-        stub_get('/subscriptions/1').to_return(body: fixture('subscription.json'))
+        stub_request(:get, 'http://id:secret@api.lelylan.com/subscriptions/1').to_return(body: fixture('subscription.json'))
       end
 
       it 'raises a Lelylan::Error' do

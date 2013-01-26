@@ -242,16 +242,15 @@ provide specs to your contribution.
 * Run `bundle install` for dependencies.
 * Run `bundle exec guard` and press enter to execute all specs.
 
-### IRB testing
+### Running locally
 
-Whenever you want to run some commands from your IRB session with the
-source code simply import `lib/`.
+Whenever you want to use the source code from your IRB session simply import `lib/`.
 
 ```
-git clone https://github.com/lelylan/lelylan-rb
-cd lelylan-rb
-irb -I lib/
-require 'lelylan'
+$ git clone https://github.com/lelylan/lelylan-rb
+$ cd lelylan-rb
+$ irb -I lib/
+$ > require 'lelylan'
 ```
 
 ## Spec guidelines
