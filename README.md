@@ -28,7 +28,7 @@ gem 'oauth2'
 Development version.
 
 ```ruby
-gem 'lelylan-rb', require: 'lelylan', git: 'https://github.com/lelylan/lelylan-rb', branch: 'master'
+gem 'lelylan-rb', require: 'lelylan', git: 'https://github.com/lelylan/lelylan-rb'
 ```
 
 ## Getting started
@@ -198,7 +198,7 @@ end
 Unluckily the `#message` method can only be a string. For this reason we
 can't return a JSON structure when lelylan offers it, but we return the
 `error.description` value.
-Learn more about the [error response structure](http://dev.lelylan.com/api/core#errors).
+Learn more about [errors on Lelylan](http://dev.lelylan.com/api/core#errors).
 
 
 ### Configurations
@@ -218,8 +218,6 @@ Client instance.
 lelylan = Lelylan::Client.new(token: token)
 lelylan.endpoint = 'https://lelylan.yourhouse.com'
 ```
-
-Learn more about the [error response structure](http://dev.lelylan.com/api/core#errors).
 
 
 ## Contributing
