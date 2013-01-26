@@ -31,9 +31,9 @@ module Lelylan
       connection = Faraday.new(options) do |builder|
         builder.request :json
         builder.use Faraday::Request::BasicAuthentication, self.client_id, self.client_secret if path =~ /subscriptions/
-        builder.use Faraday::Response::RaiseHttpError
         builder.use FaradayMiddleware::Mashify
         builder.use FaradayMiddleware::ParseJson
+        builder.use Faraday::Response::RaiseHttpError
         builder.adapter(adapter)
       end
 

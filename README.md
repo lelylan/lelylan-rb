@@ -137,7 +137,7 @@ physical devices they should provide a simple set of web services.
 **Subscriptions** - Get realtime updates by subscribing to a resource and its related event.
 [See examples](http://dev.lelylan.com/api/realtime#ruby).
 
-**User Profile** -cReturns extended information for the authenticated user.
+**User Profile** - Returns extended information for the authenticated user.
 [See examples](http://dev.lelylan.com/api/core#get-a-user-ruby).
 
 
@@ -186,7 +186,7 @@ Through the error message attribute you can access the error information.
 
 ```ruby
 begin
-  @type = Lelylan::Type.type("https://type.lelylan.com/types/wrong")
+  device = lelylan.device('<id>')
 rescue Lelylan::Error => e
   puts "The resource #{e.message.error.uri} was not found"
 end

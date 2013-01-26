@@ -1,5 +1,5 @@
 require 'faraday'
-require 'multi_json'
+require 'hashie'
 
 module Faraday
   class Response::RaiseHttpError < Response::Middleware
@@ -29,7 +29,14 @@ module Faraday
     end
 
     def error_message(response)
-      response[:body]
+      body = response[:body] || ''
+
+      begin
+        body = Hashie::Mash.new(JSON.parse(response[:body]))
+      rescue
+      end
+
+      body.is_a?(::Hashie::Mash) ? body.error.description : body
     end
   end
 end

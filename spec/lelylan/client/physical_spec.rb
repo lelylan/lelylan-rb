@@ -17,7 +17,6 @@ describe Lelylan::Client::Type do
     end
 
     it 'returns the type' do
-      pp device
       device.id.should_not be_nil
     end
 
