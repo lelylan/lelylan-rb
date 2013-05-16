@@ -19,11 +19,7 @@ module Lelylan
       # Returns Hashie The JSON resource.
       #
       def physical_properties(uri, secret, params)
-        params[:nonce] = SecureRandom.uuid if not params[:nonce]
-
-        digest    = OpenSSL::Digest::Digest.new('sha1')
-        signature = OpenSSL::HMAC.hexdigest(digest, secret, params.to_json.to_s)
-        headers   = { 'X-Physical-Signature' => signature }
+        headers = { 'X-Physical-Secret' => secret }
 
         request  = Faraday.new do |builder|
           builder.request :json
@@ -34,7 +30,6 @@ module Lelylan
         end
 
         response = request.put(uri, params, headers)
-
         response.body
       end
     end

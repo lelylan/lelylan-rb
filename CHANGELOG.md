@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.0.5 (May 16, 2013)
+
+* Added [categories](http://dev.lelylan.com/api/types#categories) service
+* Updated physical service to send the secret header
+
 ## v0.0.4 (January 26, 2013)
 
 * Full support to error handling
