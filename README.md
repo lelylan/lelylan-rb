@@ -94,12 +94,10 @@ Learn how to use Lelylan and AngulasJS in deep.
 
 - [x] [Devices](http://dev.lelylan.com/api/devices#angular).
 - [x] [Activations](http://dev.lelylan.com/api/devices#angular).
-- [x] [Histories](http://dev.lelylan.com/api/devices/histories#angular).
 - [x] [Types](http://dev.lelylan.com/api/types#angular).
 - [x] [Properties](http://dev.lelylan.com/api/types/properties#angular).
 - [x] [Functions](http://dev.lelylan.com/api/types/functions#angular).
 - [x] [Statuses](http://dev.lelylan.com/api/types/statuses#angular).
-- [x] [Locations](http://dev.lelylan.com/api/locations#angular).
 - [x] [Physical devices](http://dev.lelylan.com/api/physicals#angular).
 - [x] [Subscriptions](http://dev.lelylan.com/api/realtime#angular).
 - [x] [User Profile](http://dev.lelylan.com/api/core#get-a-user-angular).
