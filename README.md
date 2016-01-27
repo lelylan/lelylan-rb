@@ -1,11 +1,11 @@
 # Ruby SDK for Lelylan
 
-AngularJS SDK for [Lelylan](http://lelylan.com).
+Ruby SDK for [Lelylan](http://lelylan.com).
 
 
 ## Requirements
 
-Ruby client library is tested against MRI 1.9.3.
+Ruby SDK is tested against MRI 1.9.3.
 
 
 ## Installation
