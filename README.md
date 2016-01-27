@@ -18,7 +18,7 @@ Install the client using Bundler.
 
 ## Resources
 
-[Lelylan Ruby SDK Documentation](http://lelylan.github.com/lelylan-ng)
+[Lelylan Ruby SDK Documentation](http://lelylan.github.com/lelylan-rb)
 
 
 ## Contributing
